@@ -4,6 +4,7 @@ from nltk.stem.porter import PorterStemmer
 porter = PorterStemmer()
 
 import math
+import random
 from os import listdir
 from os.path import isfile, join
 
@@ -92,7 +93,8 @@ class FeatureBuilder():
                  for cat in self.categories:
                      categories = categories+","+cat
                  dataset.write("@attribute TargetClass {"+categories[1:]+"}\n\n@data\n")
-                 
+             
+             dataset_lines = []
              for fname_to_word_to_cnt in self.tf_file_to_word_to_count.items():
                 fname = fname_to_word_to_cnt[0]
                 word_to_count = fname_to_word_to_cnt[1]
@@ -110,11 +112,16 @@ class FeatureBuilder():
                         score = tf*idf*ci_val
                     feature_string = feature_string +str(round(score,3))+","
                 feature_string = feature_string+category+"\n"
-                dataset.write(feature_string)
+                dataset_lines.append(feature_string)
+            
+             # Shuffle the dataset lines and write to file
+             random.shuffle(dataset_lines)
+             for aLine in dataset_lines:
+                 dataset.write(aLine)
             
      
      def _clean_header_for_dataset(self,header):
-         new_header = header.replace("'","")
+         new_header = header.replace("'","_aps_")
          return new_header
            
      def _generate_d_val_dict(self):
@@ -216,7 +223,7 @@ if __name__=="__main__":
     featBuilder = FeatureBuilder(categories)        
     
     print "Extracting best features...."
-    features = featBuilder.get_fetaures(1500)
+    features = featBuilder.get_fetaures(500)
     
     print "Generating dataset...."
     data_format = "arff" #"csv"
