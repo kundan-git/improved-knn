@@ -39,7 +39,8 @@ class DataReaderAndHtmlParser():
     def get_categories(self):
         return self.all_categories
         
-    def print_data_description(self, data):
+    def print_data_description(self):
+        data = self.dataset
         print "\nCOUNT IF DOCUMENTS: {0}".format(data["tot_docs"])
         print "\nCOUNT IF DISTINCT CATEGORIES:",data["categories_count"]
         print "\nDISTINCT CATEGORIES:"

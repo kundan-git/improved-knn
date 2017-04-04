@@ -15,15 +15,17 @@ stop_words = get_augmented_stopwords()
 
 class FeatureBuilder():
      def __init__(self,categories):
+         self.corpus_size = 0
          self.max_features = 0
          self.categories = categories
          self.d_val_file_to_word_to_count = {}
          self.tf_file_to_word_to_count = {}
          self.df_word_to_count={}
-
+         
          # D-Value = (n-m),
          # n: # docs having term, m: # max docs in a category having the term
          self.d_value_word_to_count={} 
+         self.features = []
              
      def get_fetaures(self,max_features):
         self.max_features = max_features        
@@ -48,29 +50,73 @@ class FeatureBuilder():
         
         # Calculate TF*IDF*Ci
         word_feature_score = {}
-        corpus_size = len(self.tf_file_to_word_to_count.items())
+        self.corpus_size = len(self.tf_file_to_word_to_count.items())
         for word_agtf in tf_aggregate.items():            
             word = word_agtf[0]
             tf = word_agtf[1]
-            idf = math.log(corpus_size/float(self.df_word_to_count[word]))
-            d_val = 1/float(self.d_value_word_to_count[word]+1)
-            score = tf*idf*d_val
+            idf = math.log(self.corpus_size/float(self.df_word_to_count[word]))
+            ci_val = 1/float(self.d_value_word_to_count[word]+1)
+            score = tf*idf*ci_val
             word_feature_score[word] = score
-            print word,tf, idf,d_val,score
+            #print word,tf, idf,ci_val,score
             
         sorted_score_tuple_list = sorted(word_feature_score.items(),\
                                          key=lambda x:x[1], reverse=True)
         print "\nTOP N Features-----"
         feat_cnt= 0
-        fetaures = []
+        self.features = []
         for word_score in  sorted_score_tuple_list:
-            fetaures.append(word_score[0])
+            self.features.append(word_score[0])
             print word_score[0],word_score[1]
             feat_cnt = feat_cnt+1
             if max_features == feat_cnt:
                 break
-        return fetaures
-       
+        return self.features
+     
+     def generate_dataset(self,data_set_name,dataset_format):
+         data_set_path = data_set_name +"_"+str(self.max_features)+"."+dataset_format
+         with open(data_set_path,'w') as dataset:
+             # Get dataset headers
+             if dataset_format == "csv":
+                 headers= ""
+                 for idx in range(0,len(self.features)):
+                     headers = headers +","+self.features[idx]
+                 headers = headers + ",class\n"
+                 cleaned_header = self._clean_header_for_dataset(headers[1:])
+                 dataset.write(cleaned_header)
+             elif dataset_format == "arff":
+                 for idx in range(0,len(self.features)):
+                     headers = "@attribute "+self.features[idx]+" numeric\n"
+                     dataset.write(headers)
+                 categories = ""
+                 for cat in self.categories:
+                     categories = categories+","+cat
+                 dataset.write("@attribute TargetClass {"+categories[1:]+"}\n\n@data\n")
+                 
+             for fname_to_word_to_cnt in self.tf_file_to_word_to_count.items():
+                fname = fname_to_word_to_cnt[0]
+                word_to_count = fname_to_word_to_cnt[1]
+                category = self._get_category_from_file_name(fname)
+                word_count_in_file = len(word_to_count.items())
+                feature_string = ""#+fname.split(OUT_DIR)[1]+","
+                for idx in range(0,len(self.features)):
+                    score= 0
+                    word = self.features[idx]
+                    if word_to_count.__contains__(word):
+                        tf = word_to_count[word]/float(word_count_in_file)
+                        df = self.df_word_to_count[word]
+                        idf = math.log(self.corpus_size/float(df))
+                        ci_val = 1/float(self.d_value_word_to_count[word]+1)
+                        score = tf*idf*ci_val
+                    feature_string = feature_string +str(round(score,3))+","
+                feature_string = feature_string+category+"\n"
+                dataset.write(feature_string)
+            
+     
+     def _clean_header_for_dataset(self,header):
+         new_header = header.replace("'","")
+         return new_header
+           
      def _generate_d_val_dict(self):
          for word_doc in self.df_word_to_count.items():
              word = word_doc[0]
@@ -166,5 +212,18 @@ if __name__=="__main__":
     reader = DataReaderAndHtmlParser()
     categories = reader.get_categories()
     
+    print "Initializing feature Builder...."
     featBuilder = FeatureBuilder(categories)        
-    features = featBuilder.get_fetaures(100)
+    
+    print "Extracting best features...."
+    features = featBuilder.get_fetaures(1500)
+    
+    print "Generating dataset...."
+    data_format = "arff" #"csv"
+    data_set_path = "./../../data/dal_knn_dataset"
+    featBuilder.generate_dataset(data_set_path,data_format)
+    featBuilder.generate_dataset(data_set_path,"csv")
+    
+    reader.print_data_description()
+    
+    
