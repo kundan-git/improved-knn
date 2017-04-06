@@ -15,19 +15,20 @@ from html_to_text.DataReader import DataReaderAndHtmlParser
 stop_words = get_augmented_stopwords()
 
 class FeatureBuilder():
-     def __init__(self,categories):
+     def __init__(self,categories,use_ci):
+         self.features = []
          self.corpus_size = 0
          self.max_features = 0
+         self.use_ci = use_ci # If False, uses Tf*Idf else Tf*Idf*Ci
+         self.df_word_to_count={}         
          self.categories = categories
-         self.d_val_file_to_word_to_count = {}
          self.tf_file_to_word_to_count = {}
-         self.df_word_to_count={}
-         
+         self.d_val_file_to_word_to_count = {}
+
          # D-Value = (n-m),
          # n: # docs having term, m: # max docs in a category having the term
          self.d_value_word_to_count={} 
-         self.features = []
-             
+                      
      def get_fetaures(self,max_features):
         self.max_features = max_features        
         self._getnerate_tf_dict()
@@ -57,7 +58,7 @@ class FeatureBuilder():
             tf = word_agtf[1]
             idf = math.log(self.corpus_size/float(self.df_word_to_count[word]))
             ci_val = 1/float(self.d_value_word_to_count[word]+1)
-            score = tf*idf*ci_val
+            score = tf*idf if not self.use_ci else tf*idf*ci_val
             word_feature_score[word] = score
             #print word,tf, idf,ci_val,score
             
@@ -82,7 +83,7 @@ class FeatureBuilder():
                  headers= ""
                  for idx in range(0,len(self.features)):
                      headers = headers +","+self.features[idx]
-                 headers = headers + ",class\n"
+                 headers = headers + ",TargetClass\n"
                  cleaned_header = self._clean_header_for_dataset(headers[1:])
                  dataset.write(cleaned_header)
              elif dataset_format == "arff":
@@ -109,7 +110,7 @@ class FeatureBuilder():
                         df = self.df_word_to_count[word]
                         idf = math.log(self.corpus_size/float(df))
                         ci_val = 1/float(self.d_value_word_to_count[word]+1)
-                        score = tf*idf*ci_val
+                        score = tf*idf if not self.use_ci else tf*idf*ci_val
                     feature_string = feature_string +str(round(score,3))+","
                 feature_string = feature_string+category+"\n"
                 dataset_lines.append(feature_string)
@@ -216,21 +217,25 @@ class FeatureBuilder():
         
 if __name__=="__main__":
     
+    
     reader = DataReaderAndHtmlParser()
     categories = reader.get_categories()
     
     print "Initializing feature Builder...."
-    featBuilder = FeatureBuilder(categories)        
     
-    print "Extracting best features...."
-    features = featBuilder.get_fetaures(500)
+     # Setting it to Flase, uses Tf*Idf. If set to true uses Tf*Idf*Ci
+    use_ci = True
+    featBuilder = FeatureBuilder(categories,use_ci)        
     
-    print "Generating dataset...."
-    data_format = "arff" #"csv"
+    data_format = "csv" #"arff"
     data_set_path = "./../../data/dal_knn_dataset"
-    featBuilder.generate_dataset(data_set_path,data_format)
-    featBuilder.generate_dataset(data_set_path,"csv")
-    
-    reader.print_data_description()
+    feature_counts = [10,25,50,75]
+    for cnt in feature_counts:
+        print "Extracting best features...."
+        features = featBuilder.get_fetaures(cnt)
+        print "Generating dataset...."        
+        featBuilder.generate_dataset(data_set_path,data_format)
+        
+        reader.print_data_description()
     
     
