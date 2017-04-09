@@ -102,6 +102,7 @@ class FeatureBuilder():
                 category = self._get_category_from_file_name(fname)
                 word_count_in_file = len(word_to_count.items())
                 feature_string = ""#+fname.split(OUT_DIR)[1]+","
+                tot_score = 0
                 for idx in range(0,len(self.features)):
                     score= 0
                     word = self.features[idx]
@@ -111,9 +112,17 @@ class FeatureBuilder():
                         idf = math.log(self.corpus_size/float(df))
                         ci_val = 1/float(self.d_value_word_to_count[word]+1)
                         score = tf*idf if not self.use_ci else tf*idf*ci_val
-                    feature_string = feature_string +str(round(score,3))+","
-                feature_string = feature_string+category+"\n"
-                dataset_lines.append(feature_string)
+                        tot_score = tot_score + score    
+                    feature_string = feature_string +str(score)+","
+                #print fname+" Total Score:"+str(tot_score)
+                if not tot_score == 0:
+                    feature_string = feature_string+category+"\n"
+                    dataset_lines.append(feature_string)
+                else:
+                    print "ERROR:generate_dataset: Discarding training data"+\
+                            "as zero magnitude in VSM: filename:"+fname
+                    continue
+                
             
              # Shuffle the dataset lines and write to file
              random.shuffle(dataset_lines)
@@ -139,8 +148,11 @@ class FeatureBuilder():
                  word_to_count = fname_to_word_to_cnt[1]
                  category = self._get_category_from_file_name(fname)
                  if word_to_count.__contains__(word):
-                     self.d_val_file_to_word_to_count[word][category] = \
-                        self.d_val_file_to_word_to_count[word][category] +1
+                     try:
+                         self.d_val_file_to_word_to_count[word][category] = \
+                            self.d_val_file_to_word_to_count[word][category] +1
+                     except:
+                        print "\n\nERROR FOR: "+str(word)+" "+str(category)+" fanme:"+str(fname)
 
              # Get max occurence in category
              max_occurence = 0
@@ -168,6 +180,7 @@ class FeatureBuilder():
      def _getnerate_tf_dict(self):
         all_files =  self._get_files_in_dir(OUT_DIR)
         for afile in all_files:
+            print afile
             words_sans_stopwords = []
             with open(afile,'r') as fh:
                 words_sans_stopwords = self._remove_stop_words(fh.read())
@@ -184,10 +197,14 @@ class FeatureBuilder():
         return [path+f for f in listdir(path) if isfile(join(path, f))]
         
      def _remove_stop_words(self,text):
-        words = []
+        words = [];idx = 0
         text = text.decode("ascii","ignore").encode("ascii")
-        for word in word_tokenize(text):
-            word = word.lower()
+        tokenized_words= word_tokenize(text)
+        #print "Tokenization...[DONE]"
+        tokenized_words=[aword.lower() for aword in tokenized_words if aword.isalpha()]
+        #print "Count of words="+str(len(tokenized_words))
+        for word in tokenized_words:
+            idx +=1
             if word not in stop_words:
                 try:
                     word = porter.stem(word)
@@ -229,7 +246,7 @@ if __name__=="__main__":
     
     data_format = "csv" #"arff"
     data_set_path = "./../../data/dal_knn_dataset"
-    feature_counts = [10,25,50,75]
+    feature_counts = [100,200,300,400,500,600,700,800,900,1000,1250,1500]
     for cnt in feature_counts:
         print "Extracting best features...."
         features = featBuilder.get_fetaures(cnt)

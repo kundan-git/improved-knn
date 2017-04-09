@@ -8,7 +8,7 @@ class KNN():
          self.evaluation = {} 
          
          self._dist_measure_types = ["euclid","cosine"]
-         self.dist_type = self._dist_measure_types[0]
+         self.dist_type = self._dist_measure_types[1]
         
          """
          Persist results across multiplt run_classifier calls. Used in case
@@ -65,20 +65,33 @@ class KNN():
         dist = 0
         vector_a , cat_a = self._get_vector_category_pair(vector_a_str)
         vector_b , cat_b = self._get_vector_category_pair(vector_b_str)
+        if not len(vector_a) == len(vector_b):
+            print "\nError:_get_distance:Vector dimensions do not match!\n"
+            return -1
         if self.dist_type == "euclid":
             sq_sum = 0
             for idx in range(0,len(vector_a)):
                 va = vector_a[idx]
                 vb = vector_b[idx]
-                #print va , vb
                 sq_sum = sq_sum +  float(math.pow( (va-vb),2))
-            val = math.sqrt(sq_sum)
-            return val 
+            dist = math.sqrt(sq_sum)
         elif self.dist_type == "cosine":
-            #TODO: Implement it.
-            dist =0
+            dist = self._get_cosine_similarity(vector_a,vector_b)
         return dist
-        
+     
+    
+     def _get_cosine_similarity(self,v1,v2):
+         sumxx, sumxy, sumyy = 0, 0, 0
+         for i in range(len(v1)):
+            x = v1[i]; y = v2[i]
+            sumxx += x*x
+            sumyy += y*y
+            sumxy += x*y
+         #if not  sumxy:
+         #   print "\nERROR: Should not be zero...."
+         ret = sumxy/math.sqrt(sumxx*sumyy)
+         return ret
+    
      def _get_nearest_neighbours(self,test_data_str):  
          """ Returns a list of (category, distance) tuples, 
          which are nearest to the test vector"""
@@ -86,9 +99,6 @@ class KNN():
          for a_train_data_idx in self.train_idxs:
              
              train_data_str = self.dataset[a_train_data_idx]
-             
-             if len(train_data_str) < 400:
-                 print "Problem at idx:"+str(a_train_data_idx)
              new_dist = self._get_distance(test_data_str,train_data_str)
              to_discard, category = self._get_vector_category_pair(train_data_str)            
              if len(nn) < self.knn_k:
@@ -104,8 +114,8 @@ class KNN():
                  nn[largest_dist_idx] = (new_dist,category)
              elif self.dist_type == "cosine":
                  #Find the idx in nn which has least similarity
-                 least_sim = -100000
-                 least_sim_idx= -1
+                 least_sim = nn[0][0]
+                 least_sim_idx= 0
                  for idx in range(0,len(nn)):
                      if nn[idx][0] < least_sim:
                          least_sim = nn[idx][0]
@@ -158,6 +168,8 @@ def evaluate_results(evaluation):
     print "\nTP:"+str(tp)
     print "FP:"+str(fp)
     print "FN:"+str(fn)
+    precision =0
+    recall = 0
     for cat in categories:
         try:
             precision = (tp[cat])/float(tp[cat]+fp[cat])
@@ -177,28 +189,41 @@ def evaluate_results(evaluation):
         tot = tot+cnt
     wt_avg_fscore = round(wt_avg_fscore/float(tot),3)
     print "Total Instances:"+str(tot)+" Weighted F-Measure: "+str(wt_avg_fscore)
+    return wt_avg_fscore
               
 if __name__=="__main__":
     
-    has_header = True
-    data_set_path = "./../../data/dal_knn_dataset_500.csv"
-    
-    dataset_as_list = get_dataset_As_list(data_set_path)
-    dataset = dataset_as_list[1:] if has_header else dataset_as_list
-    
-    k_fold = 10
-    kFolddatasetGenerator = kFoldDatasetGenerator(k_fold)
-    test_train_tup_list =  kFolddatasetGenerator.get_k_fold_dataset(len(dataset)-1)
-    
-    knn_k = 15
-    knn_classifier = KNN(knn_k,True)
-    for test_train_tup in test_train_tup_list:
-        test_idx_list = test_train_tup[0]
-        train_idx_list = test_train_tup[1]
-        knn_classifier.run_classifier(dataset,train_idx_list,test_idx_list)
-        evaluation = knn_classifier.get_evaluation()
-        for item in evaluation.items():
-            print item[0],item[1]
-        print "Completed a fold...\n\n\n\n"
-    evaluate_results(evaluation)        
+    data_set_ranges = [100]
+    knn_k_ranges = [5,10,15,20,25,50]
+    final_eval = {}
+    for dsr in data_set_ranges:
+        final_eval[dsr]={}
+        for knr in knn_k_ranges:
+            #try:
+            has_header = True
+            data_set_path = "./../../data/dal_knn_dataset_"+str(dsr)+".csv"
+            
+            dataset_as_list = get_dataset_As_list(data_set_path)
+            dataset = dataset_as_list[1:] if has_header else dataset_as_list
+            
+            k_fold = 10
+            kFolddatasetGenerator = kFoldDatasetGenerator(k_fold)
+            test_train_tup_list =  kFolddatasetGenerator.get_k_fold_dataset(len(dataset)-1)
+            
+            knn_k = knr
+            knn_classifier = KNN(knn_k,True)
+            for test_train_tup in test_train_tup_list:
+                test_idx_list = test_train_tup[0]
+                train_idx_list = test_train_tup[1]
+                knn_classifier.run_classifier(dataset,train_idx_list,test_idx_list)
+                evaluation = knn_classifier.get_evaluation()
+                for item in evaluation.items():
+                    print item[0],item[1]
+                print "Completed a fold...\n\n\n\n"
+            wt_fscore = evaluate_results(evaluation)
+            final_eval[dsr][knr] = wt_fscore
+            #except:
+            #    print "....."
+    print "\n\n\n\nFinal Evaluation:\n"
+    print final_eval
         
