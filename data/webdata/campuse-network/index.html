@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+<title>UW campus network</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="/cn/stylesheet.css">
+</head>
+
+<body>
+<img src="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>UW campus network</h1>
+ <p>2002-01-30
+ <ul>
+ <li><a href="#Purpose">Purpose</a> *
+     <a href="/directives/">UW directives</a> *
+     <a href="#Overview">Network overview</a></li>
+ <li>Connections from <a href="#WalkUp">laptops</a>,
+     <a href="#Residence">the residences</a>,
+     <a href="#Home">home computers</a></li>
+ <li><a href="#Diagrams">Topology diagrams</a> *
+     <a href="#Stats">Statistics</a> *
+     <a href="#Admin">Administration</a></li>
+ <li><a href="#OldStuff">Terminated and deprecated facilities</a> *
+     <a href="#Refs">References</a></li>
+ </ul></p>
+
+<h2><a name="Purpose">Purpose</a></h2>
+ <p>UW's <a
+href="http://www.adm.uwaterloo.ca/infoprov/Planning/final_plan97/f-fulldoc1.html">mission</a>
+is to advance learning and knowledge through teaching, research, and
+scholarship. UW's computing and network resources are provided so that UW
+students, faculty, and staff can pursue their respective activities in
+support of UW's mission, as per <a
+href="http://www.adm.uwaterloo.ca/infosec/Policies/policy66.pdf">Policy
+66</a> and the <a
+href="http://www.adm.uwaterloo.ca/infocist/use98.htm">Statement on Use of
+UW Computing and Network Resources</a>. The campus network and its
+external connections are provided by the university for use within the
+context of those directives. They are resources that must be shared and
+used appropriately by UW's community of 25,000 students, faculty, and
+staff. In the absence of unlimited bandwidth at zero cost, all members of
+the UW community are responsible for ensuring that
+ <ul>
+ <li>use that is not related to UW's mission does not impact on the
+availability for use that is, and</li>
+ <li>any need to increase capacity is due to the growth of
+mission-relevant use.</li>
+ </ul></p>
+
+<h2><a name="Overview">The network</a></h2>
+
+<h3>Overview</h3>
+ <p><ul>
+ <li><a href="netdescr.html">Network description</a> ...
+     assigned network names and numbers;
+     terminology (internet, intranet, extranet, Internet);
+     locality of reference,
+     transmission-layer switching (Ethernet),
+     network-layer routing (IP),
+     integrated switching/routing;
+     client-server workgroup computing systems</li>
+ <li><a name="Diagrams">backbone topologies</a> ... [
+     <a href="Diagrams/fibreTOP.gif">fibre</a> |
+     <a href="Diagrams/UWngTOP.gif">switching</a> |
+     <a href="Diagrams/subnets.gif">routing</a> ]</li> 
+ <li><a href="internet-account.html">How do I get an Internet
+account?</a></li>
+ <li><a href="external.html">External connectivity</a>: region, province,
+country, world ... ONet, CA*net3, and the rest of the Internet</li>
+ <li>Guaranteed-minimum bandwidth allocations, <a
+href="/cn/guarmin.html">description</a></li>
+ <li>UW network-upgrade projects ... <a
+href="netUpgrade.html">summary</a> and <a href="UWng/">background</a></li>
+ </ul></p>
+
+<h3><a name="WalkUp">Connections for laptop computers, wired and
+wireless</a></h3>
+ <p><ul>
+ <li>A <a
+href="http://noc.uwaterloo.ca/~dwhiteside/pnp-doc/pnp-setup.html">network
+authentication</a> mechanism provides plug-in access via your <a
+href="http://ego.uwaterloo.ca/~uwdir/">UWdir</a> userid/password.
+Currently, there are network-authentication ports in MC-2061 and in the
+Library (Davis Centre, Dana Porter, and FES Map).</li>
+ <li>An initial deployment of userid-authenticated 802.11b wireless access
+in DC and certain parts of MC is now in the testing stage, as one of UW's
+<a
+href="http://www.math.uwaterloo.ca/mfcf/computing-environments/wireless.html">Bell
+University Labs</a> projects. Wireless-access projects are also underway
+in the Faculty of <a
+href="http://www.eng.uwaterloo.ca/~pdmckone/wireinfo.html">Engineering</a>.
+A <a href="http://uw-linux.uwaterloo.ca/WaterlooWireless/">Waterloo
+Wireless</a> "cooperative" is also in its formative stages in the Waterloo
+area.</li>
+ </ul></p>
+
+<h3><a name="Residence">Connections in the campus residences</a></h3>
+ <p><ul>
+ <li><a href="/cn/Residence/">existing facilities and established
+plans</a></li>
+ <li>UW ResNet: procedure for handling
+ <a href="/cn/Residence/rn-excess.html">excessive use</a>; past <a
+href="/cn/Residence/history.html">history</a> and future <a
+href="/cn/Residence/directions.html">directions</a>; ResNet-administrator
+<a href="http://noc.uwaterloo.ca/cn/resnet/">tools</a></li>
+ </ul></p>
+
+<h3><a name="Home">Connections from home computers</a></h3>
+ <p><ul>
+ <li>For low-speed IP connectivity from home, UW provides a <a
+href="Dialup/">dial-up modem pool</a> of 33.6Kbps modems.</li>
+ <li>For higher-speed IP connectivity from home, UW has a "preferred
+provider"  <a href="homeIP.html">agreement</a> with Bell for its <a
+href="/isthome/connectingfromhome.htm">Sympatico High-Speed Edition</a>
+service.</li>
+ <li>UW seeks to enhance its connectivity within the local community by
+completing <a href="local.html">direct-connect agreements</a> with major
+Internet Service Providers in the KW area. Such connections currently
+exist between UW and the homes and organizations served by FibreTech and
+Sentex.</li>
+ </ul></p>
+
+<h3><a name="Stats">Statistics</a></h3>
+ <p><form method="post" action="http://noc.uwaterloo.ca/cn/scripts/extUse">
+ <ul>
+ <li><a href="http://noc.uwaterloo.ca/cn/Stats/netsize/report">network
+     size</a></li>
+ <li>modem pool ...
+     <a href="http://watserv1.uwaterloo.ca/~rwwatt/tsday">yesterday</a>,
+     <a href="http://watserv1.uwaterloo.ca/~rwwatt/tsmonth">by month</a>,
+     <a href="Dialup/TSstats.html">explanation</a>;
+     <a href="Stats/modems.gif">last several years</a></li>
+ <li><a
+     href="http://noc.uwaterloo.ca/cn/Stats/routers/mrtg-router.html">
+     router</a> and <a
+     href="http://noc.uwaterloo.ca/netstats/">
+     switch</a> interfaces and <a
+     href="http://noc.uwaterloo.ca/cn/Stats/top3rd">12-month
+     projection</a></li>
+ <li>ResNet traffic by <a href="/cn/Stats/resnet.html">day</a>,
+     <a href="http://noc.uwaterloo.ca/cn/Stats/resReport">last 7 days</a>,
+     and <a href="/cn/Stats/resnet.gif">term</a>;
+     guaranteed-minimum bandwidth <a
+     href="http://noc.uwaterloo.ca/cn/Stats/guarmin/?M=D">reports</a></li>
+ <li>UW <a href="Stats/extvol.html">external</a> traffic ...
+     <input type="submit" value="Query your external use"></li>
+ </ul>
+ </form></p>
+
+<h3><a name="Admin">Network administration and operation</a></h3>
+ <p><ul>
+ <li><a href="Admin/netmgmt.html">Campus network management</a>&nbsp;...
+     management authorities and responsibilities;
+     Campus Networks Advisory Group (<a href="/CNAG/">CNAG</a>);
+     conditions of use,
+     user authentication, trusted and untrusted devices;
+     network monitoring and status reports;
+     requests for addresses and connections,
+     requests for DNS service for non-UW domains;
+     IST contacts</li>
+ <li><a href="Admin/IPreq.html">IP</a> and 
+     <a href="Admin/ATreq.html">AppleTalk</a> registrations&nbsp;... 
+     information that must be submitted to IST when requesting
+     an IP subnet number, an IP device address, or an AppleTalk zone</li>
+ <li><a href="Admin/netfirew.html">Firewalls and UW security
+practices</a>&nbsp;...
+     repeaters, switches; bridges; routers, access-control rules;
+     application-layer constraints, proxy servers</li>
+ </ul></p>
+
+<h3><a name="OldStuff">Terminated or deprecated facilities</a></h3>
+ <p><ul>
+ <li>2000-02:
+     <a name="Sytek" href="sytek">Sytek LocalNet terminated</a></li>
+ <li>1997-08:
+     <a href="Dialup/datapac.html">Datapac terminated</a></li>
+ </ul></p>
+
+<h2><a name="Refs">References</a></h2>
+ <h3>Historical</h3>
+ <p><ul>
+ <li><a href="http://www.onet.on.ca/onethistory.html">
+     the national NetNorth network (1983) and 
+     the provincial ONet network (1988)</a></li>
+ <li><a href="http://www.canarie.ca/press/ango.html">
+     A Nation Goes Online: Canada's Internet History</a></li>
+ <li><a href="http://info.isoc.org/guest/zakon/Internet/History/HIT.html">
+     Hobbes' Internet Timeline</a></li>
+ </ul></p>
+ <h3>Technical</h3>
+ <p><ul>
+ <li><a href="http://www.cira.ca/">CA domain information</a></li>
+ <li><a href="http://www.isc.org/ds/">Internet Domain Survey</a>,
+     <a href="http://www.mids.org/">
+     Matrix Information and Directory Services</a></li>
+ <li><a href="http://www.InternetTrafficReport.com/">
+     Internet Traffic Report</a> from Andover.Net</li>
+ <li><a href="http://www.rfc-editor.org/">Internet standards</a></li>
+ <li><a href="http://www.cablemodem.com/">DOCSIS</a>
+     (high-speed home IP service over cable TV)</li>
+ <li><a href="http://www.adsl.com/">ADSL Forum</a>
+     (high-speed home IP service using the same line as the phone)</li>
+ <li><a href="http://www.gigabit-ethernet.org/">Gigabit Ethernet
+     Alliance</a>,
+     <a href="http://www.10gigabit-ethernet.com/">10 Gigabit Ethernet
+     Resource Site</a></li>
+ <li><a href="http://www.oiforum.com/">Optical Internetworking
+     Forum</a></li>
+ </ul></p>
+
+<p class="byline"><a href="/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

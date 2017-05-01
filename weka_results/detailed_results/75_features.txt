@@ -1,0 +1,133 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 1 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     dal_knn_dataset_75
+Instances:    314
+Attributes:   76
+              grizzli
+              tb
+              mont
+              resum
+              panel
+              ctt
+              wart
+              9:00
+              subnet
+              nick
+              steelhead
+              resnet
+              acn
+              bac
+              snowboard
+              nnn.n
+              f-ed
+              router
+              4:00
+              ip
+              chickenpox
+              kenai
+              ci
+              jig
+              ethernet
+              bandwidth
+              heli
+              level-two
+              shipper
+              isp
+              cub
+              shawn
+              rail
+              bear
+              server
+              meter
+              amend
+              lactos
+              txt
+              ca2on
+              telemark
+              cancer
+              avg
+              infect
+              storm
+              downsview
+              ist
+              spray
+              onet
+              genit
+              railway
+              level-on
+              deic
+              cnag
+              firewal
+              halibut
+              ccr
+              -+
+              bacillu
+              predatori
+              whistler
+              cast
+              qualif
+              granular
+              laurentian
+              shingl
+              multicast
+              hpv
+              matt
+              lactas
+              windchil
+              merger
+              udap
+              refere
+              workgroup
+              TargetClass
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 1 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         202               64.3312 %
+Incorrectly Classified Instances       112               35.6688 %
+Kappa statistic                          0.5882
+Mean absolute error                      0.085 
+Root mean squared error                  0.2163
+Relative absolute error                 47.9123 %
+Root relative squared error             72.6443 %
+Total Number of Instances              314     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.682    0.007    0.882      0.682    0.769      0.761    0.888     0.654     canada-transportation-roads
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     black-bear-attack
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.787     0.194     river-rafting
+                 0.571    0.007    0.857      0.571    0.686      0.683    0.841     0.527     river-fishing
+                 0.945    0.382    0.344      0.945    0.505      0.428    0.751     0.301     co-op
+                 0.680    0.021    0.739      0.680    0.708      0.685    0.789     0.595     winter-canada
+                 0.909    0.000    1.000      0.909    0.952      0.948    0.992     0.947     campuse-network
+                 0.385    0.004    0.952      0.385    0.548      0.567    0.831     0.578     career-services
+                 0.875    0.007    0.913      0.875    0.894      0.885    0.923     0.825     snowboarding-skiing
+                 0.217    0.000    1.000      0.217    0.357      0.452    0.734     0.324     health-services
+Weighted Avg.    0.643    0.071    0.740      0.643    0.625      0.618    0.847     0.577     
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h  i  j   <-- classified as
+ 15  0  0  0  7  0  0  0  0  0 |  a = canada-transportation-roads
+  0 30  0  0  0  0  0  0  0  0 |  b = black-bear-attack
+  0  0  0  0 29  0  0  0  0  0 |  c = river-rafting
+  0  0  0 12  8  1  0  0  0  0 |  d = river-fishing
+  2  0  0  0 52  0  0  1  0  0 |  e = co-op
+  0  0  0  2  4 17  0  0  2  0 |  f = winter-canada
+  0  0  0  0  3  0 30  0  0  0 |  g = campuse-network
+  0  0  0  0 32  0  0 20  0  0 |  h = career-services
+  0  0  0  0  1  2  0  0 21  0 |  i = snowboarding-skiing
+  0  0  0  0 15  3  0  0  0  5 |  j = health-services
+

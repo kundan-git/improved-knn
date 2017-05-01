@@ -1,0 +1,214 @@
+<html>
+                                                          
+<head>
+<title>CTT/BAC Service Agreement</title>
+</head>
+
+<body>
+
+<h1>CTT/BAC Service Agreement<br>(draft 96May15)</h1>
+
+<h2>CTT/BAC Joint Technical Committee</h2>
+ <p>There will be a standing body (JTC) of up to three CTT-appointed
+persons and up to three BAC-appointed persons to regularly review the
+performance of the CTT Network within the terms of this Service Agreement,
+and to review and recommend on all proposed changes to the CTT Network or
+the terms of this Service Agreement. Under normal circumstances, the JTC
+will meet not more than once a month and not less than once a quarter. The
+deliberations of the JTC will be distributed to all Subscribers. 
+
+<h2>Network Description</h2>
+ <p>For each Subscriber, BAC will establish and maintain a CTT Network
+"Point Of Presence" (POP) on the Subscriber's premises. Each POP will
+consist of a two-port IP router ("Router") with one interface connected to
+the central CTT Network hub IP router and the other interface connected to
+the Subscriber's internal IP network. The CTT Network will interconnect
+the Subscriber-internal networks and the external link to the provincial
+network operated by the ONet Networking corporation (or the OPNet network,
+if and when that becomes a reality). With the exception of planned outages
+(see Scheduled Maintenance), the CCT Network is to be in operation 24
+hours a day, every day. 
+ <pre>
+
+                 ...---'''---...           }
+        ONet    /      CTT      \          }
+        ------+{     Network     }         }
+        link    \   hub router  /          }
+                 '''---...-+-'''           }
+                           |               }
+  BAC premises             |               } provided, installed,
+  ........................ | ............. } operated, maintained, 
+                           |               } and managed by BAC
+  Subscriber          .----+----.   }      }
+    premises          | Router  |   } POP  }
+                      '----+----'   }      }
+                           |
+                         ==+====+==
+                                |
+                                | Subscriber's internal network
+ </pre>
+ <p>
+ The Subscriber-side interface to the POP Router will be an IEEE/802.3
+"Ethernet" 10Base5 AUI to which the Subscriber will connect its internal
+network (an alternate interface may provided by BAC if mutually agreed to
+by the Subscriber and BAC). The interface for the link to the CTT Network
+hub router will be whatever BAC requires in order to provide the link
+capacity for which the Subscriber has contracted with BAC. 
+ <p>BAC will also establish a POP, on its premises, via which it will
+connect its equipment from which it will perform the functions of the
+Network Operations Centre ("NOC"), including the monitoring described in
+the "Network Performance" section below.
+
+<h2>Routing Information</h2>
+ <p>BAC will ensure that the appropriate IP routing information is
+propogated to all POP Routers from the CTT Network hub router, including
+the route to every other Subscriber network and a "default route" to the
+external ONet (OPNet) network. 
+
+<h2>Router-Imposed Security</h2>
+ <p>BAC will configure each POP Router to impose the same basic set of
+constraints on the IP packets that are to be permitted to and from every
+Subscriber network. Such constraints are essential to provide a
+rudimentary level of security, and will include simple specifications such
+as:
+ <ol>
+ <li>no packet with a source-routing option is to be forwarded; 
+ <li>no packet is to be forwarded to the Network from the Subscriber
+network unless it has a source IP address inside the IP network number
+assigned to the Subscriber network; 
+ <li>no packet is to be forwarded from the Network to the Subscriber
+network unless it has a source address outside the Subscriber network and
+a destination address inside the Subscriber network; 
+ <li>routes learned from the Subscriber networks will not be propagated. 
+ </ol>
+ <p>Anything more elaborate than these basic constraints will be the
+responsibility of the Subscriber to provide, outside the terms of this
+Service Agreement, using equipment on its internal network.
+ <p>BAC will ensure that each POP Router will be "read" accessible via
+SNMP from within its Subscriber network.
+
+<h2>Scheduled Maintenance</h2>
+ <p>Any scheduable work for which BAC requires an outage of any part of
+the CTT Network that will affect all or most Subscribers is to be
+performed between 03:00 and 04:00 and advertised by BAC at least 48 hours
+in advance to a list of email addresses to be provided by CTT.
+ <p>Any scheduable work for which BAC requires an outage of a particular
+POP may be scheduled at any time mutually agreeable to BAC and the
+Subscriber. The Subscriber will not unreasonably withhold its
+agreement to such requests. 
+
+<h2>Network Operations Centre</h2>
+ <p>From its equipment connected to the CTT Network via its POP, BAC will
+provide a Network Operations Centre (NOC) on a 24x7 basis. The functions
+and activities of the NOC will include the following: 
+ <ol>
+ <li>conduct the monitoring described in the "Network Performance" 
+sections below; 
+ <li>provide support to the designated operations and technical-support
+staffs of the Subscribers, in the form of liaison regarding the scheduling
+of installation and maintenance work and a telephone "hot line" for
+problem reporting and resolution; 
+ <li>disseminate via E-mail the "Network Performance" reports and the logs
+of the Subscriber-initiated and BAC-initiated problem reports and their
+and resolutions. The full reports and logs are to be sent to the JTC; each
+Subscriber is to receive only the sections that pertain to its POP. 
+ </ol>
+
+<h2>Domain Name System</h2>
+ <p>Each Subscriber will provide its own DNS primary server. BAC will
+provide secondary DNS service for each Subscriber network. 
+
+<h2>Network Number and Domain Name</h2>
+ <p>If requested by the Subscriber, BAC will assist the Subscriber in
+obtaining a domain name and a world-routable IP network number, by filling
+out and submitting the necessary applications on behalf of the Subscriber. 
+
+<h2>Network Performance, Daily Reporting</h2>
+ <p>BAC will measure and report on the functioning of the CTT Network as
+described in the subsections below. Scheduled maintenance time is not to
+be excluded from these measurements. Each daily report will be made
+available within eight hours of the end of that day, and will be a
+plain-text file of the form... 
+ <pre>
+	{ YYYYMMDD  linkspeed  availability  latency  utilization
+	{ POP          (Mbps)           (%)     (ms)          (%)
+	{ --------  ---------  ------------  -------  -----------
+	{ NOC         nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ ONet        nnn.nnn         nnn.n    nnn.n        nnn.n  
+	{ Subscr A    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ Subscr B    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ [...]
+	{ Subscr Z    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ --------  ---------  ------------  -------  -----------
+	{ average                     nnn.n    nnn.n        nnn.n  
+ </pre>
+ <p>The numeric values shall be determined as follows. 
+ <p><b>Linkspeed</b>. This is the rated capacity of the link between the
+Network and the POP, as reported by the value of the "ifSpeed" SNMP MIB
+variable, expressed in millions of bits per second.
+ <p><b>Availability</b>. From its equipment connected within its internal
+network via the NOC POP, at five-minute intervals, BAC will send ten
+1024-byte "ping" packets to each POP Router, including the NOC POP. The
+"ping" packets to a POP will be spaced one second apart. For each POP, the
+daily "availability" percent is calculated as...
+ <pre>
+	{       # of "ping" responses received within one second that day
+	{ 100 * ---------------------------------------------------------
+	{                   # of "ping" packets sent that day
+ </pre>
+ <p>A POP will be declared to be in a DOWN state if no response to any of
+the "ping" packets has been received within one second after the "ping" is
+sent, whereupon BAC will immediately initiate a problem investigation.
+ <p><b>Latency</b>. For each of the five-minute intervals in Availability
+above, calculate the average round-trip time in milliseconds for those
+"ping" packets for which a response was received within one second, and
+divide by two to obtain the one-way average. For each POP, the daily
+"latency" value is the average of these one-way averages for the day.
+ <p><b>Utilization</b>. For each POP, at thirty-minute intervals, BAC will
+collect the values of the two SNMP MIB counter variables "ifInOctets" and
+"ifOutOctets" for the Router's Network interface. Any interval in which
+either counter has overflowed will be discarded. The counters and
+interval-width times for the remaining intervals for that Router for that
+day will be summed and used to calculate a megabytes-per-second average
+for each of the two counters. The "utilization" percent is determined by
+expressing the larger of the two averages (assuming that the link is
+bi-directional) as a percent of the linkspeed.
+
+<h2>Network Performance, Monthly Reporting</h2>
+ <p>Each monthly report will show the monthly average for the
+corresponding daily value, and will be made available within three working
+days after the last day of that month. Also, for each POP, the following
+item will be added to the monthly report. 
+ <p><b>MTTRepair</b>. This is the average time, measured in hours from the
+time a POP has been declared DOWN, for the POP to be restored to the UP
+state. 
+
+<h2>Network Performance, Monthly Objectives</h2>
+ <p><b>Latency</b>. For each POP, BAC will initially propose an expected
+"latency" value. BAC will be considered by CTT to have met its latency
+objective that month if the reported monthly "latency" value for each POP
+is less than its expected "latency" value, provided that the corresponding
+"utilization" value is less than 50%. (It is not appropriate to hold BAC
+responsible for a higher-than-expected latency that is the result of
+congestion, a situation that is beyond BAC's control.)
+ <p><b>MTTRepair</b>. BAC will be considered by CTT to have met its
+MTTRepair objective that month if the monthly MTTRepair value is less than
+two hours.
+ <p>BAC will warrant to CTT that BAC will at all times maintain sufficient
+capacity in all components of the Network such that it will meet the above
+objectives every month.
+
+<h2>Additional Reporting</h2>
+ <p>CTT will require the best-available management information as on-going
+input to its review and decision-making processes regarding the Network
+and its evolution. BAC is expected to use the Network Performance
+measurements as the basis for making timely recommendations to CTT on the
+need to upgrade the appropriate components of the Network. From time to
+time, CTT will also require that BAC provide additional insight on these
+matters, in forms such as making presentations elaborating on the state of
+the Network at meetings of CTT's Subscriber representatives at agreed-to
+times, or by making agreed-to alterations in the performance monitoring
+and reporting described above. 
+
+</body>
+</html>

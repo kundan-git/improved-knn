@@ -1,0 +1,120 @@
+<!doctype html public "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+<head><title>High-speed home IP connectivity</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>High-speed home IP connectivity</h1>
+
+ <p>UW has a "preferred supplier" marketing agreement with Bell, for three
+years commencing 1999-09, for the provision of high-speed IP connecivity
+from the KW-area homes of UW students, faculty, and staff, using Bell's
+Sympatico "High Speed Edition" (HSE) service. This document summarizes the
+requirements UW issued in its 1998-07 <a href="homeIP1st.html" webstripperlinkwas="homeIP1st.html">Request For
+Information</a> to potential providers, and
+ <ul>
+ <li>identifies the areas where the HSE service currently differs from
+those requirements.</li>
+ </ul>
+ 1999-12-02</p>
+
+<h2>The service to be provided</h2> 
+
+ <p>High-speed IP connectivity between the "telecommuting" subscriber and
+the UW campus network is the focal point of the service being sought.
+Ideally, a range of subscriber transmission-speed offerings is envisioned,
+from a low of a hundred kilobits per second up to a high of several
+megabits per second. For some subscribers, the nature of the work will
+require high speed in both directions. 
+ <ul>
+ <li>HSE currently provides a maximum upload speed of 120Kbps and a
+maximum download speed of 960Kbps. The service area enabled by the
+"Digital Subscriber Line" modem is a maximum of 4.5km between the home and
+the Bell "Central Office" (CO) to which the home's copper-wire telephone
+line is connected. Line quality and distance between the home and the CO
+may result in less than the maximum speeds. Initially, the HSE service
+will be available within the service areas of the following COs in the
+region&nbsp;... the Albert Street CO (Waterloo), the Water Street CO
+(Kitchener), the Kingsway CO (south Kitchener), and the Galt CO
+(Cambridge).</li>
+ </ul></p>
+ 
+ <p>The contractual agreements and financial transactions pertaining to
+the subscriber's use of the service will be between the subscriber and the
+provider. The provider will be responsible for all matters pertaining to
+the subscriber service (installation of provider's equipment to and at the
+subscriber's home, billing the subscriber for the service, subscriber
+"helpdesk" trouble reporting and resolution, etc).
+ <ul>
+ <li>The equipment can be installed by the subscriber.</li>
+ </ul></p>
+
+ <p>The cost to the subscriber is expected to be lower than the cost of
+services sold by the provider that include (for example) customer userids
+and filespace on the provider's email and web servers, since the
+UW-community subscribers can use their home computers as clients to
+computing-system servers at UW for those purposes. 
+ <ul>
+ <li>Bell did not offer a reduced-price-for-reduced-features subset of its
+HSE service. However, Bell has offered a 10% discount to members of UW
+provided that the UW person is a customer of Bell's long-distance
+services.</li>
+ </ul></p>
+
+<h2>Subscriber connection</h2>
+
+ <p>The service demarcation point between the subscriber and the provider
+will be a provider-supplied device located at the subscriber's home. The
+technology used should be such that the contents of the IP packets between
+the subscriber and UW are not visible to any other party within the
+provider's network (except by those of its employees authorized by the
+provider as and when required to diagnose and correct problems within the
+provider's network).</p>
+
+<h2>UW connection</h2>
+
+ <p>As the service demarcation point between the provider and UW, UW will
+provide a 10Mbps or 100Mbps port on one of UW's campus-network backbone
+switches, with migration to a 1000Mbps Ethernet port as utilization on the
+provider/UW link grows. The provider will be responsible for all costs
+pertaining to bringing its network to this UW demarcation point.
+ <ul>
+ <li>Bell's Sympatico facilities are connected to its Nexxia national
+Internet Service (NIS). UW's campus network is connected to the provincial
+ONet network, which has a direct high-speed connection to Bell's NIS.
+Speed, latency, and reliability in the connection between UW at-home HSE
+subscribers and the UW campus network are therefore expected to be
+excellent without requiring any special HSE/UW direct local interconnect.
+However, UW will pursue such a connection in the future should conditions
+and costs warrant doing so.</li>
+ </ul></p>
+
+<h2>Addressing and routing</h2>
+
+ <p>The provider will assign the subscriber an IP address from a
+provider-obtained IP network number (for many subscribers, a dynamic
+DHCP-assigned IP address will be acceptable; for some subscribers, a
+permanent IP address may be required).
+ <ul>
+ <li>Static IP addresses are not available.</li>
+ </ul></p>
+
+ <p>On the provider/UW link, the provider will deliver to UW only those
+packets that originate within the provider's IP network and specify a
+destination within UW's IP network, and UW will deliver to the provider
+only those packets that originate within UW's IP network and specify a
+destination within the provider's IP network.
+ <ul>
+ <li>Not relevant (see "UW connection" above).</li>
+ </ul></p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.
+Any errors in statements above are my fault, not Bell's.
+</p>
+
+</body>
+</html>

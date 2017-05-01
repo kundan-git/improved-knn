@@ -1,0 +1,63 @@
+<html>
+<head><title>UWng switching, VLANs, routing, multicast</title>
+<meta http-equiv=Content-Style-Type content=text/css>
+<link rel=stylesheet href=http://www.ist.uwaterloo.ca/cn/stylesheet.css>
+</head>
+
+<body>
+<div class=frame>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align=right>
+<h1>Switching, VLANs, routing, multicast</h1>
+<p>1998-11-16
+</div>
+
+ <p><b>Switching</b> is a layer-two (transmission) function. A switch is a
+device that interconnects multiple cabling systems into a single
+transmision system. The device or the cabling-system segment that is
+connected to a switch port exists in its own independent "collision
+domain". Multiple ports on the switch can be grouped into a "broadcast
+domain" ... a virtual multi-segment transmission system, referred to as a
+"Virtual Local-Area Network", or VLAN. Each VLAN is completely unware of
+the existence of any other VLANs. 
+
+ <p><b>Routing</b> is a layer-tree (network) function. A router is a
+device that interconnects multiple networks (or network subnets, in the
+case of a subnetted netork). A campus network the magnitude of UW's cannot
+exist as a single unsubnetted network. Segmentation into multiple subnets
+is essential to maintaining the locality-of-reference isolation of traffic
+between the server and client computing systems within a subnet. In the
+architecture of the UW campus network, a layer-three IP subnet is
+implemented as a layer-two VLAN.  
+
+ <p><center><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Diagrams/VLANs.gif"></center>
+
+ <p><b>Multicast</b>. In IP networking, a special range of IP network
+numbers permits an IP packet to be addressed so that it will be delivered
+to multiple destinations. Each special address designates an "IP multicast
+group", and a computing system that wishes to participate in that
+multicast group uses a special IP protocol (IGMP) to transmit that desire
+to the local IP routing device that services it. All of the IP routing
+devices between all of the members of a multicast group have to exchange
+the group-membership information and keep it up to date so that each
+routing device will know to which of its connected networks a packet for a
+particular multicast group must be delivered. Similarly, a layer-two
+switch must know how to keep track of which of its ports have devices that
+are participating in that multicast group (if a switch cannot do that, it
+must broadcast frames containing such packets to all of its ports, which
+is not at all desirable).
+
+ <p><center><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Diagrams/multicast.gif"></center>
+ 
+ <p><b>Integration</b>. A new breed of core-class device has emerged in
+the marketplace that contains a layer-two switching processor plus a
+layer-three routing processor. The full integration of routing and
+switching into a single device will eventually enable a simpler and more
+robust topology. Eventually, cost-effective choices will emerge that will
+permit the necessary packet-prioritization and packet-routing and
+multicast functions to be moved out to the "edge" and performed in
+workgroup-class devices. 
+
+<p><hr>Maintained by rwwatt@uwaterloo.ca
+
+</body>
+</html>

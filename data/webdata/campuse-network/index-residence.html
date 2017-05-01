@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<title>UW residence-room connections</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" alt="UW" align="right"> 
+<h1>UW residence-room network connections</h1>
+ <p>2002-01-14
+ <br>The <b>ResNet</b> environment integrates specially-designed
+high-speed "switched Ethernet" residence-room networks into the UW campus
+network. There are ResNet connections in all of the UW residences and in
+two of the four federated/affiliated institutions.
+ <ul>
+ <li><a href="#UW">the UW-managed residences</a></li>
+ <li><a href="#FA">the federated/affiliated institutions</a></li>
+ <li><a href="#TP">ResNet switching and routing topology</a></li>
+ <li>procedure for handling <a href="http://ist.uwaterloo.ca/directives/rn-excess.html">excessive
+use from a ResNet connection</a></li>
+ </ul>
+ </p>
+
+<h2>UW ResNet connections</h2>
+ <p>
+ <table cellpadding="3" cellspacing="3">
+
+ <tr align="left" valign="bottom">
+ <th bgcolor="gold"><a name="UW">UW residences</a></th>
+ <th bgcolor="yellow" align="right">ResNet ports</th>
+ <th bgcolor="beige">connection date</th>
+
+ <tr valign="top"><td><a name="CLT" href="http://www.housing.uwaterloo.ca/CLT/columbia.htm">
+Columbia&nbsp;Lake&nbsp;Townhouses</a></td>
+ <td align="right">404</td><td>2001-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/cmr.gif">diagram</a></li>]</td></tr>
+
+ <tr valign="top"><td><a name="MKV" href="http://www.housing.uwaterloo.ca/Mackenzie%20King%20Village/newpage11.htm">
+MacKenzie&nbsp;King&nbsp;Village</a>
+ <td align="right">328</td><td>2001-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/cmr.gif">diagram</a></li>]</td></tr>
+
+ <tr valign="top"><td><a name="MH" href="http://www.housing.uwaterloo.ca/Minota%20Hagey/minota.htm">
+Minota&nbsp;Hagey</a></td>
+ <td align="right">73</td><td>2001-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/facmh.gif">diagram</a></li>]</td></tr>
+
+ <tr valign="top"><td><a name="REV" href="http://www.housing.uwaterloo.ca/Ron%20Eydt%20Village/roneydt.htm">
+Ron&nbsp;Eydt&nbsp;Village</a></td>
+ <td align="right">1024</td><td>East 1998-09, South 2000-09, North and
+West 2001-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/cmr.gif">diagram</a></li>]</td></tr>
+
+ <tr valign="top"><td><a name="UWP" href="http://www.housing.uwaterloo.ca/UW%20Apartments/uw%20apartments.htm">
+UW&nbsp;Place</a></td>
+ <td align="right">580</td><td>Beck Hall 2000-09, Wellesley Court 2001-09
+[<a href="http://ist.uwaterloo.ca/cn/Residence/uwp.gif">diagram</a>]; Eby Hall planned for 2002-09 (240); plans
+do not yet exist for Waterloo, Wilmot, or Woolwich Courts</td></tr>
+
+ <tr valign="top"><td><a name="V1" href="http://www.housing.uwaterloo.ca/Village%20One/village.htm">
+Village&nbsp;1</a></td>
+ <td align="right">1405</td><td>North and East 1997-10, South and West
+1998-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/v1.gif">diagram</a>]</td></tr>
+
+ <tr align="left" valign="bottom">
+ <th bgcolor="gold"><a name="FA">Federated/affiliated institutions</a></th>
+ <th bgcolor="yellow" align="right">ResNet ports</th>
+ <th bgcolor="beige">connection date</th>
+ </tr>
+
+ <tr valign="top"><td><a name="CGR" href="http://grebel.uwaterloo.ca/">
+Conrad&nbsp;Grebel&nbsp;University&nbsp;College</a></td>
+ <td align="right">116</td><td>1999-01
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/facmh.gif">diagram</a>]</td></tr>
+
+ <tr valign="top"><td><a name="REN" href="http://www.adm.uwaterloo.ca/inforen/">Renison&nbsp;College</a></td>
+ <td align="right">?</td><td>intends to provide a residence-rooms network
+for its 172+50 residents not later than 2002-09, either as part of the UW
+ResNet or via a non-UW mechanism similar to that at St.Jerome's
+University</td></tr>
+
+ <tr valign="top"><td><a name="STJ" href="http://www.sju.ca/">St.&nbsp;Jerome's&nbsp;University</a></td>
+ <td align="right">none</td><td>installed an internal "shared 10Mbps"
+wireless network for its 281 residents in 2001-09; the residents reach UW
+through an external Internet connection with FibreTech, a major KW-area
+ISP</td></tr>
+
+ <tr valign="top"><td><a name="STP" href="http://www.adm.uwaterloo.ca/infostp/">St.&nbsp;Paul's&nbsp;College</a></td>
+ <td align="right">151</td><td>1999-09
+ [<a href="http://ist.uwaterloo.ca/cn/Residence/facmh.gif">diagram</a>]</td></tr>
+
+ </table> 
+
+<h2><a name="TP">ResNet switching and routing topology</a></h2>
+ <p>
+ <ul>
+ <li>Each <b>resident</b> has a Category 5 UTP connection to a dedicated
+10Mbps port on a Cisco Catalyst 1900 Ethernet switch.</li>
+ <li>The residents in a cluster (a house, a quadrant, etc) are serviced by
+a <b>stack</b> of two or three C1900s that are interconnected via their
+100Mbps UTP ports. Each stack has a 100Mbps fibre uplink to the central
+residence switch.</li>
+ <li>The <b>central</b> switch is a Cisco Catalyst 5505 with a routing
+module (or a Catalyst 3524 switch with an attached router) with multiple
+100Mbps fibre ports and a 100Mbps fibre uplink to a switch in the core of
+the campus network.</li>
+ </ul>
+ </p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

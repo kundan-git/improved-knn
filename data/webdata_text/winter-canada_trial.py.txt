@@ -1,0 +1,1 @@
+﻿import codecs from bs4 import beautifulsoup with open('6008e.htm','r') as fh: html = fh.read() text_data = beautifulsoup(html,'lxml').get_text().strip().splitlines() with codecs.open('out.txt','w','utf-8-sig') as out: for line in text_data: if line == "": continue try: out.write(line) out.write("\n") except: print line

@@ -1,0 +1,130 @@
+<html>
+
+<head>
+<title>IP Requests and Registrations</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>IP Requests and Registrations</h1>
+ <p>2001-12-18
+ <ul>
+ <li><a href="#assign">Requests for assignment</a>
+ <li><a href="#subnet">Subnet registration</a>
+ <li><a href="#device">Device registration</a>
+ <li><a href="#record">TXT record definitions</a>
+ </ul>
+ </p>
+
+<h2><a name="assign">Requests for assignment</a></h2>
+ <p>A request for the assignment of an IP subnet number or the assignment
+of an IP address is to be mailed to <a href="mailto:hostmaster@cnoc.uwaterloo.ca">hostmaster</a> with the
+complete information needed for registration as specified in the
+appropriate section below. A request submitted by any person other than
+the CNAG prepresentative responsible for the requestor's constituency will
+be forwarded to the CNAG representative for confirmation before being
+processed further. No device may be connected to the network until its IP
+address has been assigned and registered.</p>
+
+<h2><a name="subnet">Subnet registration</a></h2>
+ <p>The following information about each IP subnet in the campus computer
+network is recorded in the Domain Name System data.
+<pre>
+   name.net   IN A      129.97.subnetnumber.0
+              IN HINFO  "parent_subnetname router_name" "protocol_type"
+              IN TXT    "ORGUNIT unit,subunit,group"
+              IN TXT    "ADMIN uwuserid"
+              IN TXT    "CONTACT uwuserid"
+              IN TXT    "LOCATION list of buildings"
+              IN TXT    "DATE yyyy-mm-dd"
+</pre></p>
+ <p>There are various ways to derive the name that has been assigned to a
+subnet number by using some form of "DNS query" utility. For example, for
+subnet 128, a query for 129.97.128.0 will tell you that this is
+"uw.net.uwaterloo.ca". A query to display all of the DNS entry for that
+name will display the information shown above.</p>
+ <p>The purpose of the TXT records is described below. A record for
+ORGUNIT, ADMIN, or CONTACT is only included if the information for the
+subnet is different than the information for the parent_subnet within
+which the subnet is contained.</p>
+
+<h2><a name="device">Device registration</a></h2>
+ <p>In a similar fashion, information about each device in the campus
+computer network is recorded in the Domain Name System data.
+<pre>
+   hostname   IN A      129.97.subnetnumber.hostnumber
+              IN HINFO  "manufacturer model"  "operating_system_name"
+              IN TXT    "ORGUNIT unit,subunit,group"
+              IN TXT    "ADMIN identifier"
+              IN TXT    "CONTACT identifier"
+              IN TXT    "LOCATION bldg,room[,etc]"
+              IN TXT    "DATE yyyy-mm-dd"
+</pre></p>
+ <p>A TXT record for ORGUNIT, ADMIN, or CONTACT is only included if the
+information for the device is different than the information for the
+subnet in which the device is contained.</p>
+ <p>Example: a campus server
+<pre>   
+   watserv1   IN A      129.97.128.116
+              IN HINFO  "Sun Sparc20"  "Solaris"
+              IN TXT    "LOCATION MC,1061"
+              IN TXT    "DATE 2001-08-15"
+</pre></p>
+ <p>Example: an individual's workstation
+<pre>
+   moa        IN A      129.97.108.74
+              IN HINFO  "Apple Macintosh"  "MacOS"
+              IN TXT    "CONTACT rwwatt"
+              IN TXT    "LOCATION MC,1065"
+              IN TXT    "DATE 1994-08-25"
+</pre></p>
+
+<h2><a name="record">TXT record definitions</a></h2>
+ <p>
+ <ul>
+ <li><b>ORGUNIT</b>: identifies the community of users serviced. If the
+community spans multiple groups in a subunit, then no group will be
+registered. If the community spans multiple subunits in a unit, then no
+subunit will be registered. For computing systems that are funded for
+general campus-wide use across the academic and/or non-academic units, the
+ORGUNIT designation will be one of {academic admin campus} depending on
+whether it is for academic groups only, or non-academic groups only, or
+both. The subnets that comprise the campus backbone network are designated
+"campus". The major units are designated as AHS, ARTS, ENG, ENVST, MATH,
+SCI, and LIB. For example, a subnet dedicated to the Groundwater research
+group in the Earth Sciences department in the Science faculty would be
+recorded as "Sci,EarthSci,Groundwater". For subnets in the non-academic
+units, unit will be "admin" and subunit will be the department name. For
+example, a subnet containing only computing systems that serve the
+Registrar's Office would be recorded as "admin,Registrar". Registrations
+for IST are recorded as "IST".</li>
+ <li><b>ADMIN</b>: identifies the UWdir "uwuserid" of the person who
+exercises policy-level authority, in accordance with established UW
+directives, on behalf of ORGUNIT for all matters pertaining to the
+computing system (or, for a subnet, for all of the computing systems
+within the subnet).</li>
+ <li><b>CONTACT</b>: identifies the uwuserid of the person designated by
+ADMIN as having the authority and responsibility to take immediate action
+to eliminate a network-impact problem being caused, whether by a computing
+system or by a user. In order to provide a course of action when the
+CONTACT cannot be located, CONTACT and ADMIN may not be the same
+person.</li>
+ <li><b>LOCATION</b>: for a device, is the building-code value and room
+number where the device is installed; for a subnet, is the set of
+buildings (or floors in one building) spanned by the cabling system that
+forms that subnet.</li>
+ <li><b>DATE</b>: is the yyyy-mm-dd specification for the date on which
+this entry was last updated.</li>
+ </ul>
+ </p>
+
+ <p>Instead of a UWuserid value, the <b>ADMIN</b> or <b>CONTACT</b> may 
+be specified as a generic UW email address ... for example, the email
+address for a list of people that provide the intended function.</p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.
+
+</body>
+</html>

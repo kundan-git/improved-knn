@@ -1,0 +1,72 @@
+<html>
+
+<head>
+<title>UW guaranteed-minimum bandwidth</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" alt="UW" align="right"> 
+<h1>Guaranteed-minimum bandwidth</h1>
+ <p>2002-01-15
+ <br>Bandwidth congestion-management algorithms have been in use on UW's
+general-Internet and university/CA*net3 external links since
+2001-06-25.</p>
+
+<h2>Overview</h2>
+ <p>The technical name is
+"Class-Based Weighted Fair Queuing with Weighted Random Early Detection"
+(CB-WFQ/WRED). It is based on our defining fair-share proportions of the
+external bandwidth for the ResNet and the non-ResNet constituencies
+("classes"). We use the percent that each constituency represents of the
+total UW population.</p>
+ <p>This benefits the entire campus. It provides a fairer environment for
+both the ResNet and non-ResNet consumers of UW's external bandwidth, so
+that one constituency cannot be consuming more than its fair share at the
+expense of the other constituency.
+ <ul>
+ <li><b>Class-Based Weighted Fair Queuing</b>, for congestion control. The
+CB component defines each "class" and specifies the percent of the total
+bandwidth that it is to be guaranteed when the link is saturated. When the
+link is saturated, the WFQ queuing mechanism gives each concurrent traffic
+flow (a specific conversation between two computers) an equal share of the
+bandwidth allocated to the class and discards packets from flows that are
+attempting to send more than that equal share.</li>
+ <li><b>Weighted Random Early Detection</b>, for congestion avoidance.
+WRED is activated when the link is approaching saturation; it discards
+packets from flows that are contributing the most toward the saturation.
+With CB-WFQ, the WRED mechanism is applied separately to the traffic in
+each class.</li>
+ </ul>
+ </p>
+
+ <p>The class definitions and percent allocations are implemented by IST
+in the UW external router (for traffic leaving UW), and by ONet Networking
+in its routers at the Toronto ends of the UW links (for traffic coming to
+UW).</p>
+
+<h2>Impact</h2>
+ <p>As a result of CB-WFQ/WRED, the bandwidth being consumed by one
+constituency can only be greater than the constituency's guaranteed
+minimum allocation if the total consumption across all constituencies is
+less than the total bandwidth, and one transmission can only consume more
+than an equal share of the available bandwidth if some other transmissions
+are consuming less than their share.</p>
+ <p>This regulates consumption on an <u>instantaneous</u> basis, both
+between and within the constituencies. The impact can be seen in the <a href="http://noc.uwaterloo.ca/cn/Stats/guarmin/?M=D">ResNet bandwidth
+reports</a>. In addition, the <a href="Residence/rn-excess.html" webstripperlinkwas="/cn/Residence/rn-excess.html">ResNet limits</a> mechanism regulates
+ResNet consumption on a <u>last N days</u> basis. As we continue to gain
+confidence in the effect of CB-WFQ/WRED, we will continue to relax the
+last-N-days ResNet limits to whatever extent seems safe.</p>
+
+<h2><a name="alloc">Bandwidth-class allocations</a></h2>
+ <p><ul>
+ <li><a href="gm0201.html" webstripperlinkwas="gm0201.html">Winter 2002</a></li>
+ <li><a href="gm0109.html" webstripperlinkwas="gm0109.html">Fall 2001</a></li>
+ </ul></p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 1 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     dal_knn_dataset_800
+Instances:    314
+Attributes:   801
+              [list of attributes omitted]
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 1 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         216               68.7898 %
+Incorrectly Classified Instances        98               31.2102 %
+Kappa statistic                          0.6405
+Mean absolute error                      0.0681
+Root mean squared error                  0.221 
+Relative absolute error                 38.4073 %
+Root relative squared error             74.2336 %
+Total Number of Instances              314     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.667    0.000    1.000      0.667    0.800      0.802    0.702     0.697     black-bear-attack
+                 0.931    0.028    0.771      0.931    0.844      0.831    0.930     0.726     river-rafting
+                 0.909    0.286    0.403      0.909    0.559      0.485    0.879     0.631     co-op
+                 0.875    0.024    0.750      0.875    0.808      0.793    0.922     0.725     snowboarding-skiing
+                 0.712    0.027    0.841      0.712    0.771      0.733    0.903     0.742     career-services
+                 0.500    0.003    0.917      0.500    0.647      0.661    0.749     0.524     canada-transportation-roads
+                 0.400    0.000    1.000      0.400    0.571      0.617    0.801     0.521     winter-canada
+                 0.381    0.000    1.000      0.381    0.552      0.604    0.572     0.424     river-fishing
+                 0.515    0.000    1.000      0.515    0.680      0.698    0.635     0.572     campuse-network
+                 0.652    0.003    0.938      0.652    0.769      0.769    0.710     0.619     health-services
+Weighted Avg.    0.688    0.059    0.818      0.688    0.697      0.686    0.800     0.635     
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h  i  j   <-- classified as
+ 20  0 10  0  0  0  0  0  0  0 |  a = black-bear-attack
+  0 27  2  0  0  0  0  0  0  0 |  b = river-rafting
+  0  1 50  0  3  0  0  0  0  1 |  c = co-op
+  0  0  3 21  0  0  0  0  0  0 |  d = snowboarding-skiing
+  0  0 15  0 37  0  0  0  0  0 |  e = career-services
+  0  1  9  0  1 11  0  0  0  0 |  f = canada-transportation-roads
+  0  0  8  6  0  1 10  0  0  0 |  g = winter-canada
+  0  4  8  1  0  0  0  8  0  0 |  h = river-fishing
+  0  1 12  0  3  0  0  0 17  0 |  i = campuse-network
+  0  1  7  0  0  0  0  0  0 15 |  j = health-services
+

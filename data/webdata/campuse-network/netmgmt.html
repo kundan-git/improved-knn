@@ -1,0 +1,233 @@
+<html>
+
+<head>
+<title>UW campus network management</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>UW campus network management</h1>
+ <p>2001-12-18
+ <ul>
+ <li><a href="../netdescr.html" webstripperlinkwas="/cn/netdescr.html">Network terminology and
+description</a>&nbsp;...
+     locality of reference;
+     level-one and level-two networks; 
+     transmission-layer switching and network-layer routing;
+     client-server workgroups</li>
+ <li><a href="#structure">Management structure</a>&nbsp;...
+     AP-IST, UCIST, CNAG, IST</li>
+ <li><a href="#practices">Established practices</a>&nbsp;...
+     acceptable use,
+     cabling-system installation,
+     names and numbers, 
+     <a href="#trust">trusted and untrusted devices</a></li>
+ <li><a href="#operation">IST campus-network administration</a>&nbsp;...
+     attachment points;
+     network monitoring;
+     requests for connections, 
+     <a href="#subnet">subnet numbers</a>, domain addresses, etc</li>
+ <li><a href="#contact">IST contacts</a></li>
+ </ul>
+ </p>
+
+<h2><a name="structure">Management structure</a></h2>
+
+ <h3>AP-IST and UCIST</h3>
+ <p>Authority for the formation of policy for UW's network and computing
+resources belongs to the Associate Provost, Information Systems and
+Technology (AP-IST), in consultation with <a href="http://www.adm.uwaterloo.ca/infocist/">UCIST</a>, the University
+Committee on Information Systems and Technology.</p>
+
+ <h3><a name="CNAG">Campus Networks Advisory Group</a></h3>
+ <p><a href="http://ist.uwaterloo.ca/CNAG/">CNAG</a> exists to make recommendation to UCIST on
+the evolution of facilities, services, procedures and policies for the
+campus network, to facilitate communication and interaction among the
+various computing-support areas on campus, and to help coordinate decision
+making on related campus-wide issues.</p>
+
+ <h3>Information Systems and Technology</h3>
+ <p><a href="http://ist.uwaterloo.ca/">IST</a> has responsibility for the campus network and
+related communications facilities within established practices. These
+include the planning, design, installation, operation, and administration
+of the campus backbone (level-one) network and its transmission systems
+and backbone and building-point-of-presence switching and routing devices,
+the connection of external networks and level-two networks to the
+level-one network, the routing of traffic over the level-one network, the
+assignment of network names and addresses, and the central
+network-administration servers and services.</p>
+
+ <h3>Academic and Academic-Support units</h3>
+ <p>In the academic-support sector (and in the academic sector, where
+requested), IST provides design, installation, and administration of the
+corridor and corridor-to-office transmission systems that comprise the
+various level-two networks, and the connection of devices to those
+transmission systems. In each Faculty, some or all of the responsibility
+for these functions is handled by the Faculty's computing-office staff
+under the authority of the Associate Dean of Computing.</p>
+
+<h2><a name="practices">Established practices</a></h2>
+
+ <h3>Cabling-system installation</h3>
+ <p>All cabling and installation work must meet the UW-established <a href="http://ist.uwaterloo.ca/ps/comm/documents/Cabling_Guidelines/Cable_Plant_Procedures_and_Guidlines.htm">
+specifications</a>.</p>
+
+ <h3>Names and numbers</h3>
+ <p>For the purposes of communication within the campus network and with
+the rest of the worldwide Internet community, UW's official "electronic
+identity" consists of the Internet network number "129.97.0.0" and the
+Internet domain name "uwaterloo.ca". These are UW resources administered
+by IST.</p>
+
+ <h3><a name="aup">Acceptable Use</a></h3>
+ <p>Traffic transmitted over the campus network and its external
+connection(s) must be in compliance with University-established policies,
+<a href="http://ist.uwaterloo.ca/directives/">directives</a>, procedures, and conditions as
+exemplified by the <a href="http://www.adm.uwaterloo.ca/infocist/use98.htm">Statement on Use of
+UW Computing and Network Resources</a>, this document, and any agreements
+between the University and external entities administering resources to
+which the campus network is connected. Examples of the latter include the
+ONet Networking corporations's <a href="http://www.onet.on.ca/Membership_Information/Terms_and_Conditions.html">
+membership terms and conditions</a>. The administrative entity serviced by
+a level-two network has authority to establish additional acceptable-use
+conditions for traffic that originates and terminates solely within that
+level-two network and its lower-level networks.</p>
+
+ <h3><a name="trust">Trusted and untrusted devices</a></h3>
+ <p>A device is deemed to be <b>trusted</b> if its network connection is
+via a mechanism that identifies the person who will be held accountable
+for a specific instance of its use, and that mechanism is under the
+control of a UW department with employees responsible for dealing with
+misuse. Examples include:
+ <ol>
+ <li>a device that isolates the user from the network so that the user
+must first login through an "authentication" server before being able to
+use the network to communicate with anything else, and the server keeps an
+audit-trail log;</li>
+ <li>a device that is connected to the campus network via a <a href="../Residence" webstripperlinkwas="/cn/Residence" />UW ResNet</a> residence-room connection;</li>
+ <li>a device in an individual's private office and intended for that
+individual's use exclusively.</li>
+ </ol>
+ Otherwise, the device is deemed to be <b>untrusted</b> and may not be
+connected unless its functioning has been so severely constrained that it
+can be used only to communicate with specific "information server" devices
+in the campus network or beyond, and only in the ways intended by the
+providers of those servers. Incidents of misuse from the device will
+require its removal from the network until it can be reconnected in a
+"trusted" manner.
+ </ol></p>
+
+<h2><a name="operation">IST campus-network administration</a></h2>
+ <h3>Attachment points</h3>
+ <p>IST provides a port on a switch or router on the level-one network as
+the point of attachment for the external network links and each level-two
+network. These switches and routers are protected by UPS equipment
+providing clean power and battery backup sufficient to protect against
+short-duration power outages.</p>
+ <h3>Network monitoring</h3>
+ <p>IST monitors selected devices in the level-one and level-two networks
+to detect loss-of-connectivity troubles as they occur. Information on
+scheduled outages and problem resolutions is posted to the "uw.network"
+newsgroup. Similar notifications from the ONet Networking operation centre
+and beyond are automatically posted to this newsgroup if they contain the
+string "waterloo". Other notifications are posted to the
+"uw.network.external" newsgroup. IST collects <a href="../index.html#Stats" webstripperlinkwas="/cn/#Stats">network-utilization data</a> for the switches and
+routers that interconnect the external and level-two networks to the
+level-one network. Daily and monthly reports are posted to the
+"uw.network.stats" newsgroup.</p>
+ <h3><a name="requests">Requests for network numbers and domain
+addresses</a></h3>
+ <p>UW's IP subnet numbers and IP addresses are a finite resource.
+Assignments of specific numbers cannot be guaranteed to be permanent. To
+minimize the need for manual renumbering in instances where
+currently-assigned numbers must be changed, those who are responsible for
+network-connected devices should configure those devices to obtain their
+IST-assigned IP address via the campus DHCP service.
+ <ul>
+ <li><b><a name="subnet">Request for IP subnet number<a/></b>. The
+creation of a new level-two or lower-level network requires that IST
+assign an IP subnet number to the new network. Any organizational unit
+contemplating a new subnet is advised to contact its <a href="netadmin.html#CNAG" webstripperlinkwas="netadmin.html#CNAG">CNAG</a> representative. There is a finite
+supply of IP subnet numbers, so a new subnet number will not be assigned
+unless the request is the result of an existing subnet having grown to the
+point where more than 90% of the available addresses are in <a href="http://noc.uwaterloo.ca/cn/Stats/netsize/report">active use</a>, or
+unless both the CNAG representative and IST's Manager of Network Systems
+Integration agree that there is some special technical condition for which
+there is no solution other than assigning a new subnet.</li>
+ <li><b>Request for IP address and device connection</b>. When IST
+receives a request to install a cabling-system connection and/or assign an
+IP address to the device that is to use that connection, we first obtain
+confirmation from the CNAG representative before proceeding.</li>
+ <li><b>Non-UW network numbers</b>. An organizational unit should not
+attempt to obtain its own IP network number. For security reasons, the
+only traffic permitted through the campus-network external connection is
+traffic that is destined to or originating from an IP address within the
+subnets of UW's IP network number. There are situations in which the
+objective is to create a lower-level network that will be invisible within
+and external to the campus network. <a href="rfc1918" webstripperlinkwas="rfc1918">RFC1918</a> provides
+a set of Class A, Class B, and Class C network numbers that may be used
+for this purpose.</li>
+ <li><b>Request for webserver addresses</b>. IST will accept a request for
+a domain-name address such as "www.XXXXX.uwaterloo.ca" pointing to a
+webserver computer provided that:
+  <ul>
+  <li>the requested "XXXXX" clearly and unambiguously designates a UW
+organizational unit (faculty, department, group, or federated/affiliated
+college), or a project of such an organizational unit, and</li>
+  <li>the request is submitted to IST with confirmation from the entity
+that has administrative authority for the computer that will house the
+corresponding web material.</li>
+  </ul>
+  Any situation in which UW sponsorship is not clear will be referred by
+IST to the relevant member of CNAG or UCIST for guidance.</li>
+ <li><b>Personal-webspace addresses</b>. To enable a simple form of
+addressing for the personal homepage for UW faculty, staff, and students,
+a facility exists that will redirect a URL of the form
+"http://uwaterloo.ca/~uwuserid/" (where "uwuserid" is your UWdir userid)  
+to the URL of your choice. You activate this by adding that URL to your
+UWdir entry. To do this, see the "SignOn with UWdir" and "Update Your
+UWdir Data" documents at <a href="http://ego.uwaterloo.ca/~uwdir/">UWdir
+and Authentication Services</a>.</li>
+ <li><b>Request to facilitate non-UW domain-name addresses</b>. IST will
+accept a request to provide limited Domain Name System service for a
+non-UW domain provided that:
+  <ul>
+  <li>the non-UW domain represents some external collective entity in
+which a UW organizational unit is clearly an on-going participant in
+support of a UW research, instructional, or administrative function,</li>
+  <li>the purpose of the request is to enable the UW organizational unit
+to house information for the non-UW entity on a UW computer (eg, a
+webserver) because the non-UW entity is incapable of having its own
+facilities, and</li>
+  <li>the request from the UW organizational unit is accompanied by
+confirmation from the non-UW entity and confirmation from the UW entity
+that has administrative authority for the computer that will house the
+information.</li>
+  </ul>
+  Any situation in which UW sponsorship is not clear will be referred by
+IST to the relevant member of CNAG or UCIST for guidance.</li>
+ </ul>
+ </p>
+
+<h2><a name="contact">IST contacts</a></h2>
+<h3>Loss-of-connectivity trouble reports</h3>
+ <p>To report an on-campus network outage, contact the 
+ <a href="http://ist.uwaterloo.ca/">IST</a> 
+ <a href="http://ist.uwaterloo.ca/cs/chip/">CHIP</a> 
+ <a href="http://ist.uwaterloo.ca/cs/helpdesk/">HelpDesk</a>
+ or mail to the IST 
+ <a href="mailto:request@ist.uwaterloo.ca">request</a> system.</p>
+<h3>Requesting cabling-system installations</h3> 
+ <p>Mail to the IST 
+ <a href="mailto:request@ist.uwaterloo.ca">request</a> system.</p>
+<h3>Requesting assignment of names and numbers</h3>
+ <p>For IP addresses, DNS hostnames, IP subnet numbers, AppleTalk zone
+ names, and reporting changes to registration information&nbsp;... mail to
+ <a href="mailto:hostmaster@cnoc.uwaterloo.ca">hostmaster</a>.</p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

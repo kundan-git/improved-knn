@@ -1,0 +1,98 @@
+<html>
+<head><title>UWng problems and opportunities</title>
+<meta http-equiv=Content-Style-Type content=text/css>
+<link rel=stylesheet href=http://www.ist.uwaterloo.ca/cn/stylesheet.css>
+</head>
+
+<body>
+<div class=frame>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" alt=UW align=right>
+<h1>In search of infinite bandwidth at zero cost</h1>
+<p>1990-02-19
+</div>
+
+<h2>Problems</h2>
+ <p>The fibre cabling system of the level-one network and the UTP
+cabling systems of the level-three networks are well positioned for
+high-speed transmission technologies. 
+ <p>Unfortunately, the coax cabling systems that still exist in all
+level-two networks and in many level-three networks are functionally
+obsolete. If everything stays as is, they will continue to have a useful
+"present" for years to come, but they already have no "future". 
+
+<h2>Opportunities</h2>
+ <p>The Ethernet "multiport repeater" that became a marketplace commodity
+by 1994 provides "shared Ethernet", in which the UTP-connected devices
+contend for the 10Mbps aggregate capacity. It has now been obsoleted by
+the Ethernet "switch", in which each port has its own dedicated bandwidth
+and the ports are internally connected by a multi-bridge bus with
+aggregate bandwidth sufficient to guarantee concurrent rated-speed
+connectivity between all pairs of ports. 
+ <p><center><table border width="90%">
+ <tr align=left>
+     <th>medium<th>transmission type
+     <th align=right>dedicated<br>bandwidth
+ <tr><td rowspan=5>Category-5 UTP<td>Ethernet
+     <td align=right>10Mbps
+ <tr><td>Fast Ethernet<td align=right>100Mbps
+ <tr><td>CDDI (FDDI)<td align=right>100Mbps
+ <tr><td>ATM<td align=right>25Mbps to <br>155Mbps
+ <tr><td>Gigabit Ethernet (?)<td align=right>1000Mbps
+
+ <tr><td rowspan=5>multimode or<br>singlemode<br>fibre<td>FDDI
+     <td align=right>100Mbps
+ <tr><td>Gigabit Ethernet<td align=right>1000Mbps
+ <tr><td>ATM<td align=right>155Mbps <br>to 9Gbps
+ <tr><td>Fast Gigabit Ethernet<td align=right>10Gbps
+ <tr><td>Wave Division Multiplexing<td align=right>Nx10Gbps
+ </table></center>
+
+<p>A <b>full-duplex Ethernet</b> link is possible when there is only a
+single device at each end of the link. Rather than using one direction for
+traffic and the other direction for collision-detection signaling, it is
+then possible to send traffic in both directions concurrently.
+
+<h2>The need for speed</h2>
+ <p>The information in the table below has been taken from "Networking
+requirements of audio and motion video", a paper by Francois Fluckiger of
+CERN, printed in the January 1996 edition of "ConneXions -- the
+Interoperability Report", published by Interop Company
+<connexions@interop.com>. 
+ <p>
+ <center>
+ <table border width="90%">
+ <tr align=left><th>application<th>technique<th align=right>bandwidth
+ <tr><td rowspan=2 valign=top>High-Definition TV
+     <td>uncompressed<td align=right>2Gbps
+ <tr><td>MPEG-2<td align=right>30Mbps
+ <tr><td>studio-quality TV<td>MPEG-2<td align=right>7Mbps
+ <tr><td>broadcast-quality TV<td>MPEG-2<td align=right>3Mbps
+ <tr><td>VCR-quality TV<td>MPEG-1<td align=right>1.4Mbps
+ <tr><td rowspan=2 valign=top>CD-quality audio,<br>per monophonic channel
+     <td>uncompressed<td align=right>728Kbps
+ <tr><td>MPEG-Audio Layer 3<td align=right>64Kbps
+ <tr><td rowspan=2 valign=top>video conferencing
+     <td>H.261<td align=right>112Kbps
+ <tr><td>GSM<td align=right>32Kbps
+ <tr><td>telephone-grade voice<td>ITU G.711<td align=right>64Kbps
+ <tr><td>telephone-grade voice<td>ITU G.721<td align=right>32Kbps
+ <tr><td>audio portion of video conferencing<td>ITU G.728
+     <td align=right>16Kbps
+ <tr><td>telephone-grade voice<td>US 1016<td align=right>4.8Kbps
+ <tr><td>voice over the Internet<td>US 1015<td align=right>2.4Kbps
+ </table>
+ </center>
+ <p>The high-bandwidth applications require a "quality of service" (QoS) 
+that will be faciliated by Ethernet evolution (802.1p enables 8-level
+priority) and newer IP "service differentiation" mechanisms such as IP ToS
+priority queuing, the Resource Reservation Protocol (RSVP), the Real-time
+Transmission Protocol (RTP), and IP <a href="http://ist.uwaterloo.ca/cn/Diagrams/multicast.gif">multicasting</a>. None of this is really
+"ready for prime time" yet. Also, IPv6, the "next generation" version of
+the IP protocol, will further enhance these mechanisms; it was
+standardized in 1995, but it could be as much as 20 years before IPv6
+becomes "the norm". 
+
+<p><hr>Maintained by rwwatt@uwaterloo.ca
+
+</body>
+</html>

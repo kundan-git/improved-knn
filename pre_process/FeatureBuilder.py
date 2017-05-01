@@ -65,11 +65,12 @@ class FeatureBuilder():
         sorted_score_tuple_list = sorted(word_feature_score.items(),\
                                          key=lambda x:x[1], reverse=True)
         print "\nTOP N Features-----"
+        total_words = len(sorted_score_tuple_list)
         feat_cnt= 0
         self.features = []
         for word_score in  sorted_score_tuple_list:
             self.features.append(word_score[0])
-            print word_score[0],word_score[1]
+            print word_score[0],word_score[1]/float(total_words)
             feat_cnt = feat_cnt+1
             if max_features == feat_cnt:
                 break
@@ -119,8 +120,9 @@ class FeatureBuilder():
                     feature_string = feature_string+category+"\n"
                     dataset_lines.append(feature_string)
                 else:
-                    print "ERROR:generate_dataset: Discarding training data"+\
+                    msg=  "ERROR:generate_dataset: Discarding training data"+\
                             "as zero magnitude in VSM: filename:"+fname
+                    #print msg
                     continue
                 
             
@@ -180,7 +182,6 @@ class FeatureBuilder():
      def _getnerate_tf_dict(self):
         all_files =  self._get_files_in_dir(OUT_DIR)
         for afile in all_files:
-            print afile
             words_sans_stopwords = []
             with open(afile,'r') as fh:
                 words_sans_stopwords = self._remove_stop_words(fh.read())
@@ -245,8 +246,8 @@ if __name__=="__main__":
     featBuilder = FeatureBuilder(categories,use_ci)        
     
     data_format = "csv" #"arff"
-    data_set_path = "./../../data/dal_knn_dataset"
-    feature_counts = [100,200,300,400,500,600,700,800,900,1000,1250,1500]
+    data_set_path = "./../data/dal_knn_dataset"
+    feature_counts = [10]
     for cnt in feature_counts:
         print "Extracting best features...."
         features = featBuilder.get_fetaures(cnt)

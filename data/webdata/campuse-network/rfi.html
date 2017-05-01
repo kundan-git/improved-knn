@@ -1,0 +1,329 @@
+<html>
+                                                          
+<head><title>CTT-2000 Consortium RFI 95Sep25</title></head>
+
+<body>
+
+<h1>Request For Information, CTT-2000 Consortium, revised 95Sep25</h1>
+ <p>The CTT-2000 Consortium ("CTT") represents a number of organizations
+("Subscriber") in Canada's Technology Triangle (the area encompassed by
+Cambridge, Guelph, and Kitchener-Waterloo) that wish to have the use of a
+local Internet-connected network ("Network") for IP connectivity between
+themselves and the constituencies they serve, and with all other
+Internet-connected entities in the local, regional, provincial, national,
+and international communities. 
+ <p>CTT wishes to enter into a multi-year service agreement ("Agreement")
+for the provision and operation of this local network. This RFI has been
+produced by a CTT subcommittee struck for the purpose of obtaining initial
+proposals from organizations that the subcommittee expects have the
+ability to be the provider/operator ("Operator") of the Network. 
+ <p>The RFI is not complete; the subcommittee is making the current draft
+available as an aid to further discussion, and such discussion may lead to
+revision of the RFI. The RFI is not confidential; however, the content of
+any response will be regarded as confidential information that is not to
+be distributed beyond the Steering Committee. CTT would like to have the
+beginnings of its network in operation in the Fall of 1995. Therefore, the
+subcommittee would very much like to receive a response from you before
+September 1. Your submission may consist of one or two parts. Part "A" is
+your initial proposal to provide the environment described in the RFI, and
+must be included. If you have an alternate proposal that you believe will
+better serve CTT's needs, you may submit that as Part "B". 
+
+<h2>Network Description</h2>
+ <p>Conceptually, each Network point of presence ("POP") will consist of a
+two-port IP router ("Router") with one interface connected to the Network
+and the other interface connected to a Subscriber network or an external
+network. The Network will interconnect the Subscriber-network POPs and the
+external-network POPs. With the exception of planned outages (see
+Scheduled Maintenance), the Network is to be in operation 24 hours a day,
+every day. 
+ <pre>
+
+       .....-----'''''-----.....         }
+      /                         \        }
+     {          Network          }       }
+      \                         /        }
+       '''''-----.....--+--'''''         }
+                        |                } provided, installed,
+                        |                } operated, managed by
+                        |                } the Operator
+                        |                }
+                   .----+----.   }       }
+                   | Router  |   } POP   }
+                   '----+----'   }       }
+                        |
+                      ==+====+==
+                             |
+                             | Subscriber's internal network, or
+                             | some external network
+ </pre>
+ <p>No connections to the Network are to occur except by instruction from
+CTT to the Operator. For each Subscriber, the Operator will establish a
+POP on the Subscriber's premises. The Router will provide an IEEE/802.3
+AUI interface to which the Subscriber will connect its internal network. 
+Power to the POP equipment will be through an "uninteruptable power supply
+(UPS)" device (specifications of the UPS are to be proposed in the
+submission). One or more additional such POPs will exist to provide the
+external connection(s) of the Network to the rest of the worldwide
+Internet (premises and external provider are to be proposed in the
+submission). 
+ <p>A range of connection-speed offerings is required to meet the current
+and evolving needs of CTT and its Subscribers. The topology and equipment
+to be used in creating and managing the Network and the POPs is to be
+proposed by the Operator. 
+ <p>CTT itself will require one such Subscriber POP, at a speed necessary
+to sustain the traffic to it. There is to be no cost attached to this
+Subscriber POP, and the speed is to be automatically upgraded by the
+Operator whenever necessary to keep pace with the traffic. 
+ <p>The Operator will also establish a POP, on its premises, via which it
+will connect its equipment from which it will perform the functions of the
+Network Operations Centre ("NOC"), including the monitoring described in
+the "Network Performance" section below. 
+
+<h2>Modem Pool</h2>
+ <p>The Operator will provide, at its POP, a contention-based dialup
+facility consisting of phone lines connected to a pool of V.34/V.42bis
+modems connected to ports on a communications server that provides
+terminal-to-host connectivity via TELNET (essential) and RLOGIN
+(optional), and dynamic-address IP connectivity via PPP (essential) and
+SLIP (optional). 
+ <p>Use of the facility is to require that each user be registered and
+have a userid/password. Users are to be able to connect to Subscriber POPs
+within the Network, but not to the external-network POP(s). The Operator
+will handle the registration of users and the assignment of userids and
+initial passwords, will bill the users for their use of the facility at a
+"dollars per hour used" rate (to be proposed by the Operator), and will
+maintain records of use sufficient to associate each use of the facility
+with the user. Such records are to be kept for the most recent three
+months, and the Operator will use these records to assist in
+investigations of penetration attempts made from the facility. 
+
+<h2>Routing Information</h2>
+ <p>The Operator will ensure that full IP routing information is
+propagated between all POPs ... the route to each Subscriber network, plus
+a default route to the appropriate external network (to be proposed by
+Operator). 
+
+<h2>Router-Imposed Security</h2>
+ <p>CTT will specify a set of basic constraints on the IP packets that are
+to be permitted to and from the Subscriber networks, and the Operator will
+ensure that that set of constraints is appropriately configured for each
+POP. Such constraints are intended to provide a rudimentary level of
+security, and will include simple specifications such as: 
+ <ol>
+ <li>no packet with a source-routing option is to be forwarded; 
+ <li>no packet is to be forwarded to the Network from the Subscriber
+network unless it has a source IP address inside the IP network number
+assigned to the Subscriber network; 
+ <li>no packet is to be forwarded from the Network to the Subscriber
+network unless it has a source address outside the Subscriber network and
+a destination address inside the Subscriber network; 
+ <li>routes learned from the Subscriber networks will not be propagated. 
+ </ol>
+ <p>Anything more elaborate than the basic constraints will be the
+responsibility of the Subscriber to provide for itself, using its
+equipment on its internal network. 
+ <p>The Operator will ensure that all Routers will be accessible via SNMP
+from the Subscriber network at the CTT-located POP, and that the Router
+that services a Subscriber POP will be accessible via SNMP from within
+that Subscriber network. 
+
+<h2>Scheduled Maintenance</h2>
+ <p>Any scheduable work for which the Operator requires an outage of any
+part of the Network is to be performed between 03:00 and 04:00 and
+advertised by the Operator at least 48 hours in advance to a list of email
+addresses to be provided by CTT. Any outage of a greater duration must be
+requested by the Operator more than 7 days in advance and agreed to by
+CTT; CTT will not unreasonably withhold its agreement to such requests. 
+ <p>Any scheduable work for which the Subscriber requires an outage of the
+POP on its premises may be scheduled at the Subscriber's discretion. The
+Subscriber will advertise that outage at least 48 hours in advance to the
+email list mentioned above. 
+
+<h2>Network Operations Centre</h2>
+ <p>From its equipment connected to the Network via its POP, the Operator
+will provide a Network Operations Centre on a 24x7 basis. The functions
+and activities of the NOC will include the following: 
+ <ol>
+ <li>conduct the monitoring described in the "Network Performance" 
+sections below; 
+ <li>provide support to the designated operations and technical-support
+staffs of the Subscribers, in the form of liaison regarding the scheduling
+of installation and maintenance work and a telephone "hot line" for
+problem reporting and resolution; 
+ <li>disseminate via E-mail the daily and monthly "Network Performance" 
+reports and the the logs of the Subscriber-initiated and
+Operator-initiated problem reports and their and resolutions; the full
+reports and logs are to be sent to the CTT Technical Committee; each
+Subscriber is to receive only the sections that pertain to its POP. 
+ </ol>
+
+<h2>Domain Name System</h2>
+ <p>Each Subscriber will provide its own DNS primary server. The Operator
+will use facilities connected via its POP to provide secondary DNS service
+for each Subscriber network. 
+
+<h2>Network Number and Domain Name</h2>
+ <p>If requested by the Subscriber, the Operator will assist the
+Subscriber in obtaining its own network number from the Canadian IP
+Registrar and its own domain name from the CA Domain Registrar, by filling
+out and submitting the necessary applications on behalf of the Subscriber. 
+The network number and domain name obtained in this fashion will be
+registered as belonging to the Subscriber, not to the Operator. 
+
+<h2>Network Performance, Daily Reporting</h2>
+ <p>The Operator will measure and report on the functioning of the Network
+as described in the subsections below. Scheduled maintenance time is to be
+excluded from these measurements. Each daily report will be made available
+within eight hours of the end of that day, and will be a plain-text file
+of the form... 
+ <pre>
+	{ YYYYMMDD  linkspeed  availability  latency  utilization
+	{ POP          (Mbps)           (%)     (ms)          (%)
+	{ --------  ---------  ------------  -------  -----------
+	{ NOC         nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ external    nnn.nnn         nnn.n    nnn.n        nnn.n  
+	{ Subscr A    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ Subscr B    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ [...]
+	{ Subscr Z    nnn.nnn         nnn.n    nnn.n        nnn.n
+	{ --------  ---------  ------------  -------  -----------
+	{ average                     nnn.n    nnn.n        nnn.n  
+ </pre>
+ <p>The numeric values shall be determined as follows. 
+ <p><b>Linkspeed</b>. This is the rated capacity of the link between the
+Network and the POP, expressed in millions of bits per second available
+for IP packets. 
+ <p><b>Availability</b>. From its equipment connected within its internal
+network at the NOC POP, at five-minute intervals, the Operator will send
+five 1024-byte "ping" packets to each POP, including the NOC POP. The five
+"ping" packets to a POP will be spaced one second apart. For each POP, the
+daily "availability" percent is calculated as... 
+ <pre>
+	{       # of "ping" responses received within one second that day
+	{ 100 * ---------------------------------------------------------
+	{                   # of "ping" packets sent that day
+ </pre>
+ <p>A POP will be considered to be in an UP state if the response to each
+of the five "ping" packets has been received within one second after the
+"ping" is sent. Otherwise, the Operator will immediately declare that POP
+to be in a DOWN state and will initiate a problem report. 
+ <p><b>Latency</b>. For each of the five-minute intervals in Availability
+above, calculate the average round-trip time in milliseconds for those
+"ping" packets for which a response was received within one second, and
+divide by two to obtain the one-way average. For each POP, the daily
+"latency" value is the average of these one-way averages. 
+ <p><b>Utilization</b>. For each POP, at thirty-minute intervals, the
+Operator will collect the values of the two SNMP MIB counters "ifInOctets"
+and "ifOutOctets" for the Router's Network interface. Any interval in
+which either counter has overflowed will be discarded. The counters and
+interval-width times for the remaining intervals for that Router for that
+day will be summed and used to calculate a megabytes-per-second average
+for each of the two counters. The "utilization" percent is determined by
+expressing the larger of the two averages (assuming that the link is
+bi-directional) as a percent of the linkspeed. 
+
+<h2>Network Performance, Monthly Reporting</h2>
+ <p>Each monthly report will show the monthly total or average for the
+corresponding daily value, and will be made available within three working
+days after the last day of that month. Also, for each POP, the following
+two line-item values will be added to the monthly report. 
+ <p><b>MTTRespond</b>. This is the average time, measured in hours from
+the time a POP has been declared DOWN, for the Operator's agent to arrive
+on-site when the cause cannot be determined and rectified by Subscriber
+personnel upon having been contacted by the Operator. 
+ <p><b>MTTRepair</b>. This is the average time, measured in hours from the
+time a POP has been declared DOWN, for the POP to be restored to the UP
+state. 
+ <p><b>Modem-Pool Contention</b>. A second section of the monthly report,
+separate from the foregoing, will show the number of ports, the total
+number of user sessions during the month, the total amount of connect time
+during the month, and the total amount of time that all ports were
+concurrently all in use (expressed as hours per day averaged over the
+month). 
+
+<h2>Network Performance, Monthly Objectives</h2>
+ <p><b>Availability</b>. The Operator will be considered by CTT to have
+met its availability objective that month if the monthly average of the
+daily "average percent availability" values is 99.5% or greater. 
+ <p><b>Latency</b>. For each connection-speed offering, the Operator will
+initially propose an expected "latency" value. The Operator will be
+considered by CTT to have met its latency objective that month if the
+reported "latency" value for every POP is less than its expected "latency"
+value. 
+ <p><b>MTTRespond</b>. The Operator will be considered by CTT to have met
+its MTTRespond objective that month if the monthly MTTRespond value is
+less than one hour. 
+ <p><b>MTTRepair</b>. The Operator will be considered by CTT to have met
+its MTTRepair objective that month if the monthly MTTRepair value is less
+than two hours. 
+ <p><b>Modem-Pool Contention</b>. The Operator will be considered by CTT
+to have met its contention objective that month if the monthly average of
+the daily all-in-use times is less than two hours. 
+ <p>The Operator will warrant to CTT that the Operator will at all times
+maintain sufficient capacity in all components of the Network such that it
+will meet all of the above objectives every month. 
+
+<h2>Additional Reporting</h2>
+ <p>CTT will require the best-available management information as on-going
+input to its review and decision-making processes regarding the Network
+and its evolution. The Operator is expected to use the Network Performance
+measurements as the basis for making timely recommendations to CTT on the
+need to upgrade the appropriate components of the Network.  From time to
+time, CTT will also require that the Operator provide additional insight
+on these matters, in forms such as making presentations elaborating on the
+state of the Network at meetings of CTT's board of directors at agreed-to
+times, or by making agreed-to alterations in the performance monitoring
+and reporting described above. 
+
+<h2>Payment</h2>
+ <p>There are to be no volume-based charges to CTT or its Subscribers for
+the use of the Network. All payments to the Operator under this Agreement
+are to be made by the Subscribers in the form of a fixed charge per month,
+based solely on the Mbps connection speed of the link from the Network to
+the Subscriber POP. In its submission, the Operator will propose a "rate
+sheet" of such costs, for each connection-speed offering that it proposes
+to provide. 
+
+<h2>The Operator as a Cooperative</h2>
+ <p>If the Operator proposes to enter into agreements with other
+organizations for purposes of providing some of the services of this
+Agreement, the Operator will identify those proposed organizations in its
+submission. After the signing of the Agreement, CTT's consent shall be
+required before the Operator may alter the composition of the Cooperative;
+CTT will not unreasonably withhold such consent. 
+ <p>The Operator will invite the head of CTT, or delegate(s) to be
+appointed as deemed appropriate by the head, to attend and participate in
+all meetings of the Operator or the Cooperative that may be relevant to
+CTT's interests. Notwithstanding the existence of such a Cooperative, the
+Operator will warrant that CTT need look solely to the Operator for
+provision, operation, management and performance of the Network and the
+performance of related services under this Agreement. 
+
+<h2>Acceptance</h2>
+ <p>The Agreement will be considered as accepted when it is signed by CTT
+and the Operator. The Network will be considered to be accepted by CTT
+when the Operator has meet its objectives for two consecutive months. Any
+delay in acceptance of the Network by CTT shall not change the Term of the
+Agreement. 
+
+<h2>Rebates</h2>
+ <p>For any month (after acceptance of the Network) during which the
+Operator objectives are not met for any particular component (Subscriber
+POP, external-networks POP, or modem pool), the Operator shall credit the
+appropriate entity (the Subscriber in the case of a subscriber POP, and
+CTT otherwise) with a monetary rebate prorated [to be determined]. 
+
+<h2>Additional Capacity</h2>
+ <p>CTT and its Subscribers shall have the option of acquiring additional
+capacity. The Operator will offer that additional capacity at the more
+favourable of: the prices, terms, and conditions of the Agreement; or the
+prices, terms, and conditions then offered by the Operator to its most
+favoured customers. 
+
+<h2>Marketing of the Network</h2>
+ <p>CTT and the Operator will jointly market the Network to potential
+Subscribers within the area served by the Network. 
+
+</body>
+</html>

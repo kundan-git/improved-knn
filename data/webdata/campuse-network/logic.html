@@ -1,0 +1,91 @@
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+<title>UW ResNet data processing</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>ResNet data processing</h1>
+ <p>2001-12-14
+ <br>This document summarizes the algorithm that is used to process the
+ResNet traffic-volume data and determine when to constrain those who have
+exceeded a limit.</p>
+ </p>
+
+<h2>At the end of each N-minute interval</h2>
+ <ol type="1">
+
+ <li>for each ResNet router,
+  <ol type="a">
+  <li>get and then clear the router's {source,destination,packets,bytes}
+accumulated data
+  <li>for each record in the data,
+   <ol type="i">
+   <li>ignore if both source and destination are ResNet addresses local to
+       this router</li>
+   <li>ignore if have already encountered this same address-pair
+       combination in the data from an already-processed router</li>
+   <li>ignore if source or destination is a "dontCount" address</li>
+   <li>otherwise,
+    <ol type="1">
+    <li>if source is a ResNet address, add bytes to source's "bytes sent
+        today" total</li>
+    <li>if destination is a ResNet address, add bytes to destinations's
+        "bytes received today" total</li>
+    </ol></li>
+   </ol></li>
+  </ol></li>
+
+ <li>for each ResNet address observed in the data, if the total for today
+is greater than the <a href="../guarmin.html" webstripperlinkwas="/cn/guarmin.html">per-user daily fair
+share</a>,
+  <ol type="a">
+  <li>if the total for today plus the last 6 days exceeds the "1500MB in
+last 7 days" limit,
+    <ol type="1">
+    <li>move this address into the router's constrained-bandwidth queue
+for the rest of the day</li>
+    </ol></li>
+  <li>otherwise, if the total for today plus the last 6 days exceeds the
+"500MB in last 7 days" limit,
+    <ol type="1">
+    <li>if it is during the peak-hours period, move this address into the
+router's constrained-bandwidth queue for the rest of the period</li>
+    </ol></li>
+  </ol></li>
+
+ </ol>
+
+<h2>At the end of the peak-hours period</h2>
+ <ol type="1">
+ <li>remove the addresses from the constrained-bandwidth queue that were
+     added because they exceeded the "500MB in last 7 days" limit</li>
+ </ol>
+
+<h2>At the end of the day</h2>
+ <ol type="1">
+ <li>remove all remaining addresses from the constrained-bandwidth
+queue</li>
+ <li>for each ResNet address,
+  <ol type="a">
+  <li>add today's sent+received total to yesterday's list of totals</li>
+  <li>save only the last 6 days' totals</li>
+  </ol></li>
+ <li>produce the daily report</li>
+ </ol>
+
+<h2>At the end of the term</h2>
+ <ol type="1">
+ <li>produce end-of-term report</li>
+ <li>delete all data accumulated this term</li>
+ </ol>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

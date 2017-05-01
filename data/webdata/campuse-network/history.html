@@ -1,0 +1,510 @@
+<html>
+
+<head>
+<title>Coping with networked residences</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>Coping with the impact of networked residences at the University
+of Waterloo</h1>
+ <p>2001-12-14</p>
+
+<h2>Overview</h2>
+ <p>It is essential to understand why the institution exists. That
+understanding provides the yardstick by which to measure all things that
+are possible, in order to avoid those that do not serve the purpose of the
+institution.</p>
+ <p>UW's <a href="http://www.adm.uwaterloo.ca/infoprov/Planning/final_plan97/f-fulldoc1.html">mission</a>
+is to advance learning and knowledge through teaching, research, and
+scholarship. UW is not an Internet Service Provider. An ISP is an
+organization whose mission is to provide Internet connectivity to other
+entities. UW does not provide Internet connectivity to non-UW entities.
+UW's computing and network resources are provided so that UW students,
+faculty, and staff can pursue their respective activities in support of
+UW's mission, as per <a href="http://www.adm.uwaterloo.ca/infosec/Policies/policy66.pdf">Policy
+66</a> and the <a href="http://www.adm.uwaterloo.ca/infocist/use98.htm">Statement on Use of
+UW Computing and Network Resources</a>.</p>
+
+ <p>Extending the campus network into the UW and federated/affiliated
+college residences was one of the responses to UW's 1998 objective of
+enabling high-speed connectivity from the campus network into the homes of
+UW students, faculty, and staff (see the <i>Teaching and Learning</i>
+section of the <a href="http://www.adm.uwaterloo.ca/infocist/Directions1998.html">1998
+Directions Statement</a> published by <a href="http://www.adm.uwaterloo.ca/infocist/">UCIST</a>).</p>
+
+ <p>The <a href="http://www.ist.uwaterloo.ca/cn/">campus network and its
+external connections</a> are resources that must be shared and used
+appropriately by UW's community of 25,000 students, faculty, and staff. In
+the absence of unlimited bandwidth at zero cost, every member of the UW
+community has a responsibility to participate in managing utilization of
+these shared resources to ensure that
+ <ul>
+ <li>use that is not related to UW's mission does not impact on the
+availability of a resource for use that is, and</li>
+ <li>any need to increase the capacity of a resource is due to the
+growth of mission-relevant use.</li>
+ </ul>
+ </p>
+
+<h2>History of modifications</h2>
+
+ <p>Since the introduction of ResNet in the Fall Term of 1997, <a href="http://www.ist.uwaterloo.ca/">IST</a> has been pursuing mechanisms
+to cope with the impact of the growing number of network connections in
+the campus residences by placing per-resident limits on volume, rather
+than trying to constrain access based on issues such as "content".
+ <table border="0" cellpadding="3" cellspacing="3">
+ <tr><td valign="top">1998-01-01</td><td>Introduced per-day and
+term-to-date <b>limits on external traffic</b>, to deal with excessive use
+of UW's external bandwidth.</td></tr>
+ <tr><td valign="top">2000-08-25</td><td>Changed <u>from</u> limits on
+external traffic <u>to</u> <b>limits on campus+external traffic</b>, to
+address excessive-use problems caused by residents using on-campus systems
+as tunnels for off-campus traffic. The term-to-date average was increased
+from 25MB to 30MB to account for the inclusion of on-campus
+traffic.</td></tr>
+ <tr><td valign="top">2000-12-05</td><td>Changed consequence of exceeding
+the daily maximum <u>from</u> confinement to the local residence network
+for the rest of the day <u>to</u> placement in a <b>constrained-bandwidth
+queue</b> for the rest of the day.</td></tr>
+ <tr><td valign="top">2001-01-02</td><td>Those who exceed a limit are
+placed in the constrained-bandwidth queue only during peak-hours periods,
+to minimize their impact on the work of the majority of the UW community
+but enable the transmission of larger-volume objects outside the
+peak-hours period.</td></tr>
+ <tr><td valign="top">2001-02-08</td><td>Introduced "1500MB in the last 10
+days" limit to deal with the very small minority whose use outside the
+peak-hours periods had become so conspicuous that it required action
+before it grew to have any larger impact on the other members of the UW
+community who prefer to work at those times.</td></tr>
+ <tr><td valign="top">2001-04-24</td><td>The term-to-date (3000MB) and
+daily-average (30MB) limits were replaced by a "300MB in the last 10 days"
+limit.</td></tr>
+ <tr><td valign="top">2001-06-25</td><td><b>Activated <a href="../guarmin.html" webstripperlinkwas="http://ist.uwaterloo.ca/cn/guarmin.html">minimum guaranteed
+bandwidth</a> fair-share queuing.</b></td></tr>
+ <tr><td valign="top">2001-09-01</td><td>The residence administrations
+provided funding to increase UW's external bandwidth by 20%, thus raising
+ResNet's minimum guaranteed share from 22% of 20Mbps to 35% of 24Mbps for
+the Fall 2001 term.</td></tr>
+ <tr><td valign="top">2001-10-07</td><td>After having had sufficient time
+to confirm that CB-WFQ/WRED was indeed having the expected effect, the
+"300MB in last 10 days" and "1500MB in last 10 days" limits were increased
+by 43% by changing to "MB in last 7 days", and the hours of constraint for
+exceeding the 300MB limit were reduced by 13%, from a total of 102 hours
+per week to a total of 89 hours per week (an increase of 20% in the number
+of non-constraint hours).</td></tr> 
+ <tr><td valign="top">2001-11-23</td><td>The "300MB in last 7 days" limit
+was increased by 67% to "500MB in last 7 days", an increase of 138% since
+the start of the term.</td></tr>
+ </table></p>
+
+<h2>The technology</h2>
+
+<h3>Topology</h3>
+ <p><ul>
+ <li>Each residence-room outlet in the campus network is connected via
+Cat5 UTP to a 10Mbps port in a stack of two or three Cisco Catalyst 1900
+Ethernet switches that are locally interconnected via 100Mbps UTP
+ports.</li>
+ <li>Each switch stack has a 100Mbps fibre uplink to a residence-centric
+Catalyst 5505 switch, which has a 100Mbps fibre uplink to a C5505 core
+switch.</li>
+ <li>Each residence-centric C5505 contains a Route Switch Module (ie, a
+router).</li>
+ </ul></p>
+ <p><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Residence/v1.gif"></p>
+ <p><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Residence/cmr.gif"></p>
+ <p><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Residence/uwp.gif"></p>
+ <p><img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Residence/facmh.gif"></p>
+
+<h3>Address administration</h3>
+ <p><ul>
+ <li>We configure the switch ports to allow only one Ethernet address, and
+to learn and "lock in" first Ethernet address seen on the port.</li>
+ <li>We permanently assign an IP address corresponding to each
+residence-room switch port.</li>
+ <li>We use DHCP to map the Ethernet address to the assigned IP address.
+ <li>We configure each residence router to run with a static ARP table of
+IP/Ethernet addresses.</li>
+ </ul></p>
+
+ <p>When we started in the Fall term of 1997, each residence
+administration had to collect and report to us each resident's Ethernet
+address, by switch/port, at the start of the term. For the start of the
+Fall term of 2000, we developed a Perl program that uses SNMP to get the
+Ethernet address connected to each switch port and generate the DHCP
+entries and the routers' ARP-table entries from that.</p>
+
+<h3>Traffic analysis</h3>
+ <p><ul>
+ <li>We use the IP ACCOUNTING feature in Cisco's
+IOS to gather traffic data (source IP, destination IP, packets,
+bytes) from the router that connects the residence network to the
+campus.</li>
+ <li>We process that data via various Perl programs to track and report <a href="http://noc.uwaterloo.ca/cn/Stats/resReport">campus+external use</a>
+by each resident.</li>
+ </ul></p>
+
+<h2>The impact</h2>
+
+<h3>Fall 1997</h3>
+ <p><ul>
+ <li>We added the first 680 ports in V1, one of the residences
+administered by the UW Housing department.</li>
+ <li>The cost to Housing for the cabling plus switches was about $290 per
+residence-room connection.</li>
+ <li>Housing charged $50 per four-month term, if the resident wanted the
+connection activated.</li>
+ <li>The "take" rate was about 50%.</li>
+ <li>We activated the service in October. By November, consumption of UW's
+external bandwidth had more than doubled.</li>
+ </ul>
+ <img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Stats/extvol.gif">
+ </p>
+
+<h3>Winter 1998</h3>
+ <p><ul>
+ <li>We began an process of informing the residence administration each
+time a resident showed up in the daily "top hogs" list of those causing
+more than 1% of the total consumption of the external link.</li>
+ <li>The residence administration contacted and warned the resident.</li>
+ <li>On the third instance, we added an access-list filter in the
+residence router to block off-campus traffic to/from the resident's IP
+address ("confined to campus").</li>
+ <li>To get the confinement removed, the resident had to go plead with
+the Associate Dean of Computing for the faculty in which the resident was
+registered as a student.</li>
+ <li>Once the ADC got annoyed of excuses and said "no", the resident's
+connection remained confined to campus for the rest of the term.</li>
+ <li>The process greatly annoyed the small minority of students who felt
+no obligation to confine their use to university-intended purposes.</li>
+ <li>The process also greatly annoyed the ADCs, the residence
+administration, and us. We began to contemplate ways to automate the
+process.</li>
+ <li>And, some small number of enterprising residents quitely began to use
+one faculty's HTTP proxy server to "tunnel" their off-campus
+traffic.</li>
+ </ul></p>
+
+<h3>Fall 1998</h3>
+ <p><ul>
+ <li>The number of residence connections increased from 680 to 1500.</li>
+ <li>The annoying aspects of the process got much more annoying.</li>
+ <li>We started implementation for a fully-automated system of <a href="http://ist.uwaterloo.ca/directives/w99rn-excess.html">limits</a>, by adding a few more Perl
+programs to the suite.</li>
+ </ul></p>
+
+<h3>Winter 1999</h3>
+ <p><ul>
+ <li>We instituted the automated system of limits ... max 2500MB per term,
+max 25MB term-to-date daily average, and max 150MB per day. Data showed
+that 85% of the residents were under those limits.</li>
+ <li>Exceeding the max-per-day limit resulted in confinement to campus for
+the rest of the day.</li>
+ <li>Exceeding the term-to-date daily average lowered the max-per-day
+limit to 15MB for as long as it took the daily average to fall below 25MB
+again.</li>
+ <li>Exceeding the term limit lowered the max-per-day limit for the rest
+of the term.</li>
+ <li>IP ACCOUNTING data collected, analyzed, updated every 12
+minutes.</li>
+ <li>No more annoyances to ADCs, residence administrators, or us.</li>
+ <li>The portion of external traffic attributable to residence connections
+fell to 20%.</li>
+ <li>We started to get complaints from some good-citizen residents about
+the bad-citizen residents who were using the unrestricted on-campus HTTP
+proxy server to "tunnel" their off-campus downloads.</li>
+ </ul></p>
+
+<h3>Fall 1999</h3>
+ <p><ul>
+ <li>Residence connections went from 1500 to 1800.</li>
+ <li>The "take" rate went up to about 65%.</li>
+ </ul></p>
+
+<h3>Winter 2000</h3>
+ <p><ul>
+ <li>The "take" rate was up to about 70%.</li>
+ <li>The prominence of Napster exposed the fact that lots of bad-citizen
+residents were using the unrestricted on-campus HTTP proxy server to
+"tunnel" their off-campus traffic.</li>
+ <li>Our first venture in to QoS mechanisms was an experiment with the
+Cisco IOS "Committed Access Rate" (CAR) to constrain residence traffic to
+2Mbps. Brutally effective. We want a kinder gentler mechanism that only
+attacks those who are trying to consume the most.</li>
+ <li>We started doing IP ACCOUNTING at the residence routers and tracking
+the total on-campus and external traffic by resident.</li>
+ <li>Total external use caused by residents, as a result of "tunneling"
+through on-campus systems, was almost four times that detected at the
+external router ... approaching 60% of the external traffic.</li>
+ <li>The faculty that owned the proxy server asked us to prevent its use
+from residence connections.</li>
+ <li>Total traffic attributable to the residence connections immediately
+dropped, to only about twice what was being detected at the external
+router (ie, some residents were using other tunneling targets and
+techniques).</li>
+ </ul>
+ <img webstripperattrwas="src" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Stats/resnet.gif">
+ </p>
+
+<h3>Spring 2000</h3>
+ <p><ul>
+ <li>An external-traffic report in the middle of the term ...
+ <pre>
+2000-06-21 residence external traffic
+average 12 MBpd, 808 users, 51 days
+
+MBpd      N  cumN        cum%N    cum%V    aMBpd
+-----  ----  ----------  -------  -------  -----
+<5 201 201 607 24 76 2 98 1 < 10 139 340 468 42 58 12 88 3 < 15 130 470 338 58 42 28 72 6 < 20 136 606 202 75 25 52 48 8 < 25 135 741 67 91 9 82 18 11 < 30 66 807 1 99 1 99 1 12 < 35 1 808 0 100 0 99 1 12 </pre></li>
+ <li>We redid the automated system to limit <a href="http://ist.uwaterloo.ca/directives/rn-excess.html">campus+external</a> per-resident
+traffic, for implementation starting Fall 2000.</li>
+ <li>3000MB per term, max 30MB term-to-date daily average.</li>
+ <li>Again, based on data that showed that 85% of the residents used less
+than that.
+<pre>
+2000-06-21 residence campus+external traffic
+21GB/day, 715 users, average 30MB/day
+
+MBpd      N  cumN        cum%N    cum%V    aMBpd
+-----  ----  ----------  -------  -------  -----
+<5 85 85 630 11 89 0 100 2 < 10 103 188 527 26 74 4 96 5 < 15 109 297 418 41 59 11 89 7 < 20 116 413 302 57 43 20 80 10 < 25 113 526 189 73 27 32 68 13 < 30 89 615 100 86 14 44 56 15 <=== < 35 25 640 75 89 11 47 53 15 < 40 9 649 66 90 10 49 51 16 < 45 9 658 57 92 8 51 49 16 < 50 5 663 52 92 8 52 48 16>  50    52   715     0  100   0  100   0     29
+</pre></li>
+ <li>A number of academic units are preparing to experiment with
+instructional video-on-demand distribution servers. The new system of
+residence-traffic limiting therefore has a list of on-campus IP
+addresses that are exempt from counted traffic.</li>
+ <li>We developed a set of <a href="http://noc.uwaterloo.ca/cn/resnet/">web-based tools</a> by which the
+residence administrator can (after <a href="#idauth">authenticating</a>)
+query a resident's usage counters and display/alter the status of certain
+switch/port settings in that residence, including to clear the learned
+Ethernet address from a port or disable/enable the port. It is a few Perl
+programs that do SNMP "get" and "set" operations. (It has also been
+expanded into a more general-purpose tool that will enable specific
+individuals to display and alter various port parameters on various
+switches.)</li>
+ <li>One of these programs allows the residence-network administrator to
+automatically clear all the learned Ethernet addresses from all the
+residence switches at the end of each term, so that the switches will
+acquire the newly-learned Ethernet addresses at the the beginning of next
+term.</li>
+ </ul></p>
+
+<h3>Fall 2000 -- constrain, not confine</h3>
+ <p><ul>
+ <li>Residence connections went from 1800 to 2400 ... that's the half-way
+point for the existing plus currently-planned new residences. The
+"subscription rate" was 2010, or 84%. As of the end of the Fall-term
+lecture period on December 4,
+  <ul>
+  <li>94% of the residents were under the 30MB daily-average limit,</li>
+  <li>45% had never exceeded their daily-max limit, and another 46% had
+been in a limit-exceeded state less than 5% of the time,</li>
+  <li>total time confined was 1.5% of user-days total, and</li>
+  <li>on-campus traffic was 5.3% of campus+external total.</li>
+  </ul>
+  </li>
+ <li>On December 5, we began putting those residents who have exceeded
+their limit for the day into contention for a constrained low-bandwidth
+pipe (64Kbps) between the residence router and the campus for the rest of
+that day, rather than cutting off their entire campus+external access for
+the rest of that day. That bandwidth is sufficient only to allow them to
+continue with small text-based applications such as reading/sending mail,
+reading/posting course newsgroups, and retrieving assignment details from
+course webservers. Over the course of a day, as the number of users in
+contention grows, being constrained becomes less and less pleasant.</li>
+ </ul></p>
+
+<h3>Winter 2001 -- "last 10 days" limits</h3>
+ <p><ul>
+ <li>At the start of the term, we began applying the constraint only
+during "peak hours" periods, which we defined as 0800-2300 Monday through
+Thursday, 0800-1800 Friday, 1200-1800 Saturday, and 1200-2300 Sunday.
+Traffic is counted throughout the entire day, but the consequence of being
+in the limit-exceeded state is applied only during the peak-hours periods.
+Outside those periods, usage is not limited.</li>
+ <li>It took less than five weeks for a very small minority (2%) of the
+residents to prove that they were capable of consuming all available
+external bandwidth outside the peak-hours periods. To curtail this
+"conspicuous consumption" before the very small minority grew any larger,
+we introduced a last-10-days limit of 1500MB and put those who exceeded it
+into the constrained-bandwidth queue even outside the peak-hours
+periods.</li>
+ <li>At the end of the term, we replaced the "3000MB since start of term"
+and "30MB daily average" limits with a "300MB in last 10 days" limit.</li>
+ </ul></p>
+
+<h3>Spring 2001 -- QoS considerations</h3>
+ <p><ul>
+ <li>Starting 2001-06-25, we activated Class-Based Weighted Fair Queuing
+with Weighted Random Early Detection on the external-links router, to
+provide "guaranteed minimum bandwidth" for the residence networks and the
+rest of the campus, based on the percent that the ResNet users represent
+of the entire campus.</li>
+ <li>But we are keeping the per-resident limits and constraints in place
+until we are confident that we understand the extent to which CBWFQ/WRED
+is effective.</li>
+ </ul></p>
+
+<h3>Fall 2001 -- guaranteed minimum bandwidth</h3>
+ <p><ul>
+ <li>Effective 2001-09-01, the residence administrations provided funding
+to increase UW's external bandwidth by 20%, thus raising ResNet's minimum
+guaranteed share from 22% of 20Mbps to 35% of 24Mbps for the Fall 2001
+term.</li>
+ <li>On 2001-10-07, after having had sufficient time to confirm that
+CB-WFQ/WRED was indeed having the expected effect, the limits were
+increased by changing the last-N-days period from 10 to 7, and the hours
+of constraint for exceeding the 300MB limit were reduced by.</li>
+ <li>On 2001-11-23, the "300MB in last 7 days" limit was increased to
+"500MB in last 7 days".</li>
+ </ul>
+ The CB-WFQ/WRED algorithms have proven very effective during weekday
+hours, as shown by the following daily-summary report.</p>
+ <pre>2001-12-06 ResNet consumption of external bandwidth
+IP general-Internet plus university/CA*net3 capacity averages 20.6Mbps 
+* One or both links are usually saturated if Ext reaches 15.6Mbps
+
+hour    Ext %cap   ResExt %cap %Ext   guarMin = 35% of Ext at capacity 
+----   ---- ----   ------ ---- ----
+  00   14.8   72     12.5   61   84   ---------+-----c-----E----
+* 01   19.4   94     17.3   84   89   ---------+-----------cE---
+* 02   18.5   90     16.1   78   87   ---------+----------c-E---
+  03   13.1   64     10.9   53   83   ---------+---c-------E----
+  04   10.9   53      9.3   45   85   ---------+-c---------E----
+  05    9.0   44      7.4   36   82   ---------c----------E-----
+  06    6.6   32      4.2   20   64   -----c---+------E---------
+  07    5.5   27      3.7   18   67   ----c----+-------E--------
+  08   10.0   48      5.5   27   55   -------c-+----E-----------
+  09   12.8   62      3.6   17   28   ----c--E-+----------------
+  10   14.7   71      5.5   27   37   -------c-E----------------
+* 11   16.3   79      6.1   30   37   --------cE----------------
+* 12   18.0   87      7.4   36   41   ---------cE---------------
+* 13   17.9   87      7.6   37   42   ---------cE---------------
+* 14   17.9   87      7.7   37   43   ---------c-E--------------
+* 15   17.5   85      7.4   36   42   ---------cE---------------
+* 16   16.9   82      6.6   32   39   --------c+E---------------
+* 17   17.7   86      7.2   35   41   ---------cE---------------
+* 18   16.9   82     10.4   50   62   ---------+--c---E---------
+* 19   16.0   78     10.6   51   66   ---------+---c--E---------
+* 20   16.2   79     11.2   54   69   ---------+----c--E--------
+* 21   17.0   82     12.1   59   71   ---------+-----c--E-------
+* 22   18.4   89     13.8   67   75   ---------+-------c-E------
+* 23   18.1   88     14.1   68   78   ---------+-------c--E-----
+ </pre>
+ 
+<h3>Winter 2002 -- ???</h3>
+
+<h2>Resource-management alternatives</h2>
+
+<h3>Alternatives considered and rejected</h3>
+ <p>The following do not enable alternate means of connecting computers in
+residences to the campus network. However, achieving the bandwidth-control
+objective they represent is a necessary prior condition to pursuing
+alternate means of connection.</p>
+ <ul>
+ <li><b>Provide residence connectivity via some ISP</b>. This would
+require obtaining non-UW IP network numbers for the residence networks. It
+has the advantage of removing 95% of residence traffic from contention for
+UW resources, but it also has several significant disadvantages. It is not
+likely to be a wise use of money&nbsp;... provisioning for the required
+bandwidth (Bell via HSE, Rogers via @Home, or some other Internet Service
+Provider with a KW presence) will be more expensive per total Mbps than
+the significant discount that ONet Networking obtains for its Toronto
+general-Internet connections to its national/international ISPs because
+the aggregate general-Internet subscribed bandwidth of ONet's members is
+measured in the hundreds of Mbps. Also, for the 5% of residence traffic
+that is with on-campus systems, unless that ISP is willing to provide a
+direct <a href="../local.html" webstripperlinkwas="/cn/local.html">local</a> connection of its network to the
+UW network, this will cause routing of campus/residence packets through an
+added chain of local/regional/national ISPs; the resulting packet latency
+and discard rates will be worse by factors measured in tens to a hundred.
+This goes in the exact opposite direction to preparing for an environment
+in which connectivity with on-campus systems will increase as the
+web-interface student information system unfolds over the next year and
+higher-bandwidth "teaching and learning" multi-media servers and services
+are developed.</li>
+ <li><b>Route the external residence traffic through an ISP and the UW
+traffic via the campus network</b>. This would also require obtaining
+non-UW IP network numbers for the residence networks. It does not address
+the higher cost of the ISP external bandwidth. Also, it perpetuates the
+existing complexity to deal with residents using on-campus systems to
+tunnel their off-campus traffic.</li>
+ <li><b>Provide separate ONet external bandwidth for ResNet users</b>. For
+the immediate future only, it is possible to do this over the ATM circuits
+used by ONet Networking, but there are significant disadvantages&nbsp;...
+unused capacity in the ResNet-dedicated circuit would not be available to
+the rest of the campus, unused capacity in the non-ResNet circuit would
+not be available to ResNet users, it does not eliminate the "tunnel
+through on-campus systems" problem, and the ATM connection to ONet will be
+abandoned in favour of a Gigabit EtherNet connection to the ORION "Optical
+IP" network that will replace the ONet network sometime in 2002.
+ <li><b>Impose a maximum-bandwidth cap on ONet external bandwidth for
+ResNet users</b>. This is a variation of "provide separate ONet bandwidth"
+above. It has the same disadvantage that unused non-ResNet capacity would
+not be available to ResNet users, and it does not eliminate the
+"tunnel" problem.</li>
+ </ul>
+
+<h3>The alternative chosen</h3>
+ <p>To reduce the complexity of meeting resource-management obligations,
+an approach is required that involves IP bandwidth allocation, fair-share
+queuing, and packet-priorization mechanisms. These are collectively
+referred to as IP "Quality of Service" (QoS) mechanisms. This does not
+eliminate the "tunnel" problem, but it is the best approach to the rest of
+the problems.
+ <ul>
+ <li><b>Provide a guaranteed minimum ONet external bandwidth for ResNet
+users</b>. This can be done using IP bandwidth-apportioning features of
+the UW router and the ONet router at the Waterloo and Toronto ends of UW's
+ONet link.</li>
+ </ul>
+ </p>
+
+ <p>The approach is to set a basic minimum guarantee equal to the percent
+that ResNet users represent of the total UW population. It is possible for
+the residence administrations to provide IST with funds for additional
+bandwidth to increase the ResNet guaranteed minimum.</p>
+
+ <p>It is necessary to maintain essential aspects of the current <a href="rn-excess.html" webstripperlinkwas="/cn/Residence/rn-excess.html">limits</a> mechanism, to address the
+"tunnel through on-campus systems" problem and to constrain unreasonably
+excessive use.</p>
+
+
+<h2>The end ... not</h2>
+
+<h3>Identification and authentication mechanisms</h3>
+ <p><ul>
+ <li>UW's on-line campus directory, <a name="idauth" href="http://ego.uwaterloo.ca/~uwdir/">UWdir</a>, has been in place since
+the early 1990s.</li>
+ <li>In 1999, we augmented this identification system with a
+userid/password authentication system using a Windows NT Domain Controller
+database.</li>
+ <li>In 2000, we developed a <a href="http://ist.uwaterloo.ca/sy/projects/">network-port
+authentication</a> mechanism that uses the campus-directory authentication
+system. This enables us to deploy network ports for portable or desktop
+computers, anywhere on campus ("we can even wire the trees"). It also
+permits the resident with a portable computer to use one of those
+connections, and still enables us to apply the per-resident limits to that
+resident.</li>
+ <li>Perhaps we'll abandon the residence address-assignment process in
+favour of the port-authentication process, if we can modify the system of
+per-resident limits to be keyed by userid rather than IP address.</li>
+ </ul></p>
+
+<h3>References</h3>
+ <p><ul>
+ <li><a href="../index.html" webstripperlinkwas="/cn/">The campus network</a></li>
+ <li><a href="../Stats/resnet.html" webstripperlinkwas="/cn/Stats/resnet.html">MRTG graphs of traffic on the
+residence-network router interfaces</a></li>
+ <li><a href="directions.html" webstripperlinkwas="directions.html">UW residence-network directions</a></li>
+ </ul></p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>
+
+

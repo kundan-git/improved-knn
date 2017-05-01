@@ -1,0 +1,108 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.lazy.IBk -K 1 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     dal_knn_dataset_50
+Instances:    314
+Attributes:   51
+              grizzli
+              tb
+              resum
+              mont
+              panel
+              wart
+              ctt
+              subnet
+              9:00
+              steelhead
+              nick
+              resnet
+              snowboard
+              acn
+              ip
+              router
+              bac
+              nnn.n
+              f-ed
+              4:00
+              ethernet
+              kenai
+              bear
+              chickenpox
+              ci
+              bandwidth
+              cub
+              jig
+              heli
+              shipper
+              level-two
+              isp
+              rail
+              server
+              shawn
+              meter
+              storm
+              amend
+              cancer
+              ist
+              telemark
+              lactos
+              txt
+              ca2on
+              infect
+              spray
+              onet
+              avg
+              railway
+              level-on
+              TargetClass
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 1 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         204               64.9682 %
+Incorrectly Classified Instances       110               35.0318 %
+Kappa statistic                          0.5953
+Mean absolute error                      0.0856
+Root mean squared error                  0.214 
+Relative absolute error                 48.239  %
+Root relative squared error             71.8519 %
+Total Number of Instances              314     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.879    0.000    1.000      0.879    0.935      0.931    0.915     0.895     campuse-network
+                 0.640    0.021    0.727      0.640    0.681      0.657    0.791     0.561     winter-canada
+                 0.982    0.382    0.353      0.982    0.519      0.456    0.772     0.310     co-op
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     black-bear-attack
+                 0.404    0.000    1.000      0.404    0.575      0.601    0.842     0.622     career-services
+                 0.727    0.003    0.941      0.727    0.821      0.816    0.899     0.724     canada-transportation-roads
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.765     0.174     river-rafting
+                 0.917    0.007    0.917      0.917    0.917      0.910    0.923     0.835     snowboarding-skiing
+                 0.217    0.000    1.000      0.217    0.357      0.452    0.688     0.301     health-services
+                 0.524    0.007    0.846      0.524    0.647      0.648    0.789     0.528     river-fishing
+Weighted Avg.    0.650    0.070    0.752      0.650    0.631      0.628    0.837     0.579     
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h  i  j   <-- classified as
+ 29  0  4  0  0  0  0  0  0  0 |  a = campuse-network
+  0 16  5  0  0  0  0  2  0  2 |  b = winter-canada
+  0  0 54  0  0  1  0  0  0  0 |  c = co-op
+  0  0  0 30  0  0  0  0  0  0 |  d = black-bear-attack
+  0  0 31  0 21  0  0  0  0  0 |  e = career-services
+  0  0  6  0  0 16  0  0  0  0 |  f = canada-transportation-roads
+  0  0 29  0  0  0  0  0  0  0 |  g = river-rafting
+  0  1  1  0  0  0  0 22  0  0 |  h = snowboarding-skiing
+  0  4 14  0  0  0  0  0  5  0 |  i = health-services
+  0  1  9  0  0  0  0  0  0 11 |  j = river-fishing
+

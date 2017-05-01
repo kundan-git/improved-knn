@@ -1,0 +1,304 @@
+<html>
+
+<head>
+<title>UW Campus Network Firewalls and Security Practices</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>Network firewalls and UW security practices</h1>
+ <p>2002-01-03
+ <ul>
+ <li><a href="#termin">Terminology</a></li>
+ <li><a href="#common">Common firewalls</a></li>
+ <li><a href="#secpra">Router-firewall security practices</a></li>
+ <li><a href="#unauth">Protection from unauthenticated-user devices</a></li>
+ <li><a href="#future">Further work required</a></li>
+ </ul>
+ </p>
+
+<h2><a name="termin">Terminology</a></h2>
+
+<p>
+<center>
+<pre>
+&nbsp;.---------.    .----------.    .-----------.&nbsp
+&nbsp;| harmful |    | firewall |    | protected |&nbsp
+&nbsp;'----+----'    '--+----+--'    '-----+-----'&nbsp
+&nbsp;     |            |    |             |      &nbsp
+&nbsp;     '------------'    '-------------'      &nbsp
+</pre>
+</center>
+</p>
+
+<p>A <b>firewall</b> is the generic term for any kind of barrier that
+prevents the spread of something harmful. Understanding any particular
+firewall requires understanding what the harmful thing is and how the
+firewall prevents it from spreading. See <a href="../netdescr.html" webstripperlinkwas="/cn/netdescr.html">Campus Network Description</a> and <a href="netmgmt.html" webstripperlinkwas="/cn/Admin/netmgmt.html">Campus Network Management</a> for background
+information.</p>
+
+<h2><a name="common">Common firewalls</a></h2>
+
+<p>Simple firewalls exist both at the transmission-system layer and the
+network layer.</p>
+
+<h3>At the transmission-system layer</h3>
+
+<p><ul>
+
+ <li><b>The Ethernet interface in a computer is a firewall, under normal
+operation</b>. The harmful thing is the volume of frames on the
+cabling-system segment to which it is connected. Under normal operation,
+the interface ignores all frames except those that are addressed to its
+computer and those that are "multicast" frames (which, by definition, must
+be examined by all devices connected to a transmission system). This is
+not a problem in an Ethernet-switch transmission system, but it is a
+serious concern in a shared-medium transmission system. 
+ <p><i>A person who has control of the machine's operating system can
+instruct its Ethernet interface to pass all frames that transit the
+cabling-system segment to the computer for processing. This is the essence
+of a "frame analyzer" (sometimes referred to as a "packet sniffer"  or
+"packet snooper"). In the hands of an authorized technical-support person
+trusted to perform problem-diagnosis tasks, it is an essential tool. In
+the hands of anyone else, it is a harmful thing.</i></p>
+ </li>
+
+ <li><b>A repeater is not a firewall</b>. The purpose of a repeater is
+to take the transmission-system "frame" that it has received from one of
+its ports and repeat that frame to all of its other ports. In the 1980s,
+we used repeaters to joint two thick-wire coax cable segments, or to joint
+one thick-wire and multiple thin-wire coax segments. In the early 1990s,
+we used multiport repeaters (hubs) to join multiple "unshielded twisted
+pair" (UTP) cabling-system segments. In the latter half of the 1990s,
+Ethernet switches made repeaters obsolete.</li>
+
+ <li><b>A multi-port repeater with eavesdrop protection is a
+firewall</b>. The harmful thing is the information in the data portion of
+the frame (the part of the frame that contains the network-layer packet).
+A repeater with "eavesdrop protection" sends the frame intact out the port
+that leads to the destination device, but prevents that information from
+spreading to other devices by putting garbage in the data portion of the
+frame before sending it out the other ports (unless, of course, it is a
+multicast frame, which must be repeated intact).
+ </li>
+
+ <li><b>A bridge is a firewall</b>. It interconnects two or more
+cabling-system segments. The harmful thing is the volume of frames on each
+of these cabling-system segments. The bridge prevents unneeded frames from
+spreading from one segment to the other segment(s) by ignoring any frame
+that is destined for a device that is on the port on which the frame was
+received. Otherwise, the frame is transmitted out the port that leads to
+the destination device. However, multicast frames must be transmitted out
+all other ports.</li>
+
+ <li><b>A switch is a firewall</b>. It is a high-performance multiport
+bridge, usually with processing capacity sufficient to move frames between
+its "n/2" different pairs of ports at the sum of the physical-layer speeds
+of the media connected to those pairs. Some switches only permit a single
+device to be connected to a port. Others permit either a single device or
+a cabling-system segment to be connected to a port. In either case, the
+frame is only sent out the port that leads to the destination device
+(unless it is a multicast frame, which must be transmitted to all ports
+other than the one from which it was received, or it is a frame destined
+for an address not known to the switch, in which case the switch "floods"
+the frame to all other ports).</li>
+
+</ul></p>
+
+<h3>At the network layer</h3>
+ <p>A device that forwards packets based on IP addresses rather than
+transmission-system addresses is referred to herein as a "router".
+
+<ul>
+
+ <li><b>A router is a firewall</b>. It interconnects two or more
+otherwise-unconnected transmission systems. Each independent transmission
+system forms a "network" that has its own unique network number. The
+harmful thing is the volume of frames on the transmission system. The
+router prevents unneeded frames from spreading outside their own
+transmission system by accepting only those frames that are addressed to
+that router port (thus it ignores all transmission-layer multicast frames
+as well). The data portion of a frame is the network-layer "packet". The
+router extracts the packet's network-layer destination address, consults
+its routing table, and gives the packet to the port out which lies the
+network containing that destination address; that port puts the packet
+into the data portion of a frame and transmits it onto the transmission
+system. (If the destination is to a network-layer multicast address, then
+the packet has to be copied to its other ports that the router knows lead
+to addresses that wish to receive that multicast traffic; how the router
+learns about those ports is beyond the intended scope of this
+document.)</li>
+
+ <li><b>A router with access-control rules is a firewall</b>. The harmful
+thing is some of the sources, destinations, and/or types of packets that
+would otherwise pass through the router. The router prevents their spread
+by examining each packet received, and testing the various fields in that
+packet against a set of organization-determined rules to decide whether to
+drop (reject, filter) it or forward (accept, route) that packet.</li>
+
+</ul></p>
+
+<h2><a name="secpra">UW router-firewall security practices</a></h2>
+
+ <p>Implementing effective network security practices requires placing
+carefully-chosen constraints on the nature of the traffic that is
+considered "safe" to allow into, out of, and through the network. In its
+simplest form, this requires proper setting of vendor-provided
+configuration options and the use of access-control rules in all of the
+campus-backbone routers that interconnect the external network(s) and the
+subnets of the internal network. Ideally, those rules should be of the
+form "permit things that are safe; deny all else".</p>
+
+<h3>External (between UW and the rest of the world)</h3>
+ <p>IST configures options and access-control lists (rules) in UW's
+external router to control the packets that enter and leave the campus
+network via its external connections. The options and rules reject traffic
+types that are known to be significant security liabilities that can be
+exploited by external "hackers" attempting to penetrate computers within
+the campus network, and activities that impede mission-relevant traffic by
+consuming significant shared-resource bandwidth (including
+denial-of-service attacks). The list of traffic types to be rejected is
+determined in consultation with <a href="http://ist.uwaterloo.ca/CNAG/">CNAG</a> and <a href="http://ist.uwaterloo.ca/CSAG/">CSAG</a>.<p>
+ <p>For each IP packet, each rule is tested in succession until a match
+occurs. The following is an overview of the rules that are currently in
+place.
+ <ol>
+ <li>deny incoming packets that have a UW subnet-broadcast destination
+address</li>
+ <li>deny incoming packets that have a multicast, loopback, or RFC1918
+(private network) source address</li>
+ <li>permit incoming packets for established TCP sessions</li>
+ <li>permit incoming packets with multicast destination addresses</li>
+ <li>permit incoming BGP routing updates from authorized sources</li>
+ <li>permit incoming SNMP and ICMP packets from authorized sources</li>
+ <li>deny incoming ICMP "Echo Request" packets (this rejects incoming ping
+and traceroute requests) and SNMP packets, deny outgoing ICMP "Echo Reply"
+packets</li>
+ <li>deny any packet that is an ICMP Redirect or Unreachable, a UDP Echo,
+or any of CharGen, Link, lpd, NetBus client/server, NFS, RPC, TFTP, or
+UUCP</li>
+ <li>deny incoming DNS zone-transfer requests unless destination is one of
+UW's internal primaries and source is one of UW's external secondaries</li>
+ <li>deny incoming packets that claim to have UW source addresses</li>
+ <li>deny outgoing packets that claim to have non-UW source addresses</li>
+ <li>deny packets that are any of the protocols known to be used by
+music/video file-sharing software (such as Gnutella, KaZaA, Morpheus,
+etc)</li>
+ <li>permit everything else</li>
+ </ol></p>
+
+ <p>The list is reviewed on a regular basis.  Eventually, for at least
+some part of the campus network, it will be converted to a "permit only
+the small set of assumed-to-be-safe things that are required in support of
+UW's mission, deny all else" form, which would prevent every new
+not-yet-understood thing from hurting that part of the UW environment.</p>
+
+<h3>Internal (between subnets)</h3>
+ <p>The above "external firewalling" does nothing to curtail internal
+penetration attempts or shared-resource abuse between machines in the
+different subnets of the campus network. IST configures the "core" routers
+that interconnect the second-level subnets to activate all available
+intrusion-rejection features that do not seriously impede the performance
+of the routers. Further work is required in this area. For example, for
+some on-campus subnets, we don't need to allow traffic to machines in
+those subnets to be initiated from outside those subnets.</p>
+
+<h3>Internal (between machines in the same subnet)</h3>
+ <p>Ensuring that all machines in a subnet are wired to switches instead
+of shared-access transmission systems (repeaters) prevents one machine
+from passively spying on the traffic of the other machines, but it does
+not prevent one machine from trying to penetrate or masquerade as another
+machine in that same subnet.</p>
+ <p>Switches keep getting more sophisticated. Hopefully one day the
+transmission systems throughout the campus network will contain only
+switches that demand user authentication each time a computer is plugged
+in or powered on, and then assign that computer an IP address to use for
+the duration and prevent it from using any other IP address. But that
+technology isn't routinely available, yet.</p>
+
+<h3>Protecting the sensitive devices in the campus network</h3>
+ <p>In the simplest case, this requires internal routers with an
+access-control mechanism that <b>permits</b> any communication to be
+initiated from any of the sensitive devices in a subnet out into the
+campus network and beyond, but <b>denies</b> any attempt to initiate any
+communication to the sensitive devices from the campus network or
+beyond.</p>
+ <p>More complex cases require special access-control measures whose
+treatment is beyond the intended scope of this document. Such measures are
+under on-going investigation, and include permitting access to certain
+subnets and devices only by specifically-authenticated people.</p>
+
+<h3><a name="unauth">Protecting the campus (and beyond) from
+unauthenticated-user devices</a></h3>
+ <p>There is a growing desire to provide wireless and wired network ports
+for "information search and retrieval" workstations and portable devices
+(such as laptop computers and personal digital assistants) in all areas of
+the campus. From the perspective of security, the provision of such
+connections must be regarded as harmful in the extreme.</p>
+
+<p><center><pre>
+&nbsp;harmful devices                      protected devices&nbsp
+&nbsp;  .-. .-. .-. .-.    .----------.    .-. .-. .-. .-.  &nbsp
+&nbsp;  |H| |H| |H| |H|    | firewall |    |P| |P| |P| |P|  &nbsp
+&nbsp;  '+' '+' '+' '+'    '--+----+--'    '+' '+' '+' '+'  &nbsp
+&nbsp;   |   |   |   |        |    |        |   |   |   |   &nbsp
+&nbsp;.--+---+---+---+--.     |    |     .--+---+---+---+--.&nbsp
+&nbsp;| untrusted world |-----'    '-----|  trusted world  |&nbsp
+&nbsp;'-----------------'                '-----------------'&nbsp
+</pre></center></p>
+
+ <p>Since 1991, the university has imposed administrative regulations on
+the nature of the devices that can be connected to any portion of the
+campus network (see <a href="netmgmt.html" webstripperlinkwas="netmgmt.html">Network Management
+Practices</a> for details). Devices that do not authenticate their users
+and are used by multiple people are harmful. For example, they constitute
+a launching pad from which someone can anonymously communicate with
+malicious intent or from which a "hacker" can anonymously attempt to
+penetrate any computer in the campus network and beyond. Therefore, such
+devices must be isolated from the campus network and the world by
+connecting the harmful devices in a private network behind a firewall
+server that performs user authentication and maintains an audit-trail log,
+in some fashion.
+
+<ol>
+
+ <li><b>A login/proxy server</b>. The devices have no access to the campus
+network and beyond. Each user of each device must communicate with "proxy"
+processes running on the server, or must TELNET or RLOGIN to the server
+and complete a userid/password login and then use the server as the source
+from which to communicate. As far as the campus network and the rest of
+the Internet are concerned, the devices do not exist.</li>
+ <li><b>An authentication/address server</b>. The server allows traffic
+to/from each device to pass through only after the user of the device has
+completed a userid/password login and been assigned an IP address. There
+must be some counterpart process by which the server detects that the
+user's "session" has ended, disallows further traffic to/from that device,
+and reclaims the IP address for reassignment. IST has developed a <a href="http://ist.uwaterloo.ca/sy/projects/netauth.html">network-port authentication</a> system
+for use in providing network-switch ports for laptop computers, until such
+time as such systems become commercially available, and investigation is
+underway to provide a comparable user-authentication mechanism for
+wireless access. Engineering Computing has developed a more general <a href="http://www.eng.uwaterloo.ca/~bruce/appliances/naa/">Network
+Authentication Appliance</a> that should be sufficient in a variety of
+lower-volume situations.</li>
+ <li><b>By connecting the devices behind a router with an access-control
+list that severely constrains the permitted communications to a
+deemed-to-be-safe subset of specific application protocols and specific
+network destinations</b>. This is the only solution if it is impossible to
+authenticate the users of the harmful devices.</li>
+
+</ol></p>
+
+<h2><a name="future">Further work required</a></h2>
+ <p>Securing UW's computing and network resources is an on-going task. IST
+tracks evolving network and computing-system security technologies
+(network-port user authentication, virus and intrusion detection,
+firewalls, etc) and deploys them within the campus as dictated by UW
+priorities and funding.</p>
+
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST.</p>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+<title>UW ResNet directions</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../stylesheet.css" webstripperlinkwas="/cn/stylesheet.css">
+</head>
+
+<body>
+<img webstripperattrwas="src" webstripperlinkwas="http://www.uwaterloo.ca/UWlogo.gif" align="right" alt="UWlogo">
+<h1>UW residence-network directions</h1>
+ <p>2001-12-14
+ <br>This document describes the directions IST is pursuing for the
+management of access to campus and external bandwidth for the UW students
+who live in the residences that have provisioned their rooms with
+connections to the UW campus network. This set of UW campus-network
+connections is known as "ResNet".</p>
+
+<h2>Introduction</h2>
+
+<h3>Background</h3>
+ <p>The introduction of the first 500 ResNet connections in Village&nbsp;1
+in October of 1997 led almost immediately to the saturation of the campus
+network's external bandwidth. With the start of the Winter 1999 term, IST
+introduced an automated mechanism to limit excessive ResNet external use.
+With the start of the Fall 2000 term, that was expanded to campus+external
+use, to deal with the growing (ab)use of on-campus systems as tunnels for
+off-campus traffic. For a detailed account of the evolution of the
+mechanism to cope with various forms of excessive use, see <a href="history.html" webstripperlinkwas="history.html">Coping with the impact of networked residences at the
+University of Waterloo</a>.</p>
+ <p>To date, there is little evidence to support any claim that
+UW-assigned academic work requires UW students to consume any significant
+portion of UW's external bandwidth. There is also no evidence to support
+any claim that all non-ResNet use is mission-relevant, but that must be
+pursued outside the scope of ResNet considerations.</p>
+
+<h3>Resource management</h3>
+ <p>The UW ResNet environment now encompasses 4083 (78%) of the 5262
+spaces provided by Housing and the four federated/affiliated institutions,
+each with a dedicated 10Mbps switched-Ethernet connection to the UW campus
+network. A <a href="rn-excess.html" webstripperlinkwas="rn-excess.html">limit</a> mechanism and a fair-share
+<a href="../guarmin.html" webstripperlinkwas="/cn/guarmin.html">minimum guaranteed bandwidth</a> mechanism are
+in place to regulate consumption of UW's shared-bandwidth resources.</p>
+
+ <p>The mechanism of identifying ResNet users by their assigned IP address
+and imposing limits to prevent excessive use has required that IST develop
+a collection of small programs that&nbsp;...
+ <ul>
+ <li>configure each ResNet switch to bind the Ethernet address of the
+resident's computer to the switch port to which the computer is
+connected;</li>
+ <li>collect those Ethernet addresses from the switches and add them to
+the campus-network DHCP server, which assigns a predetermined IP address
+to the resident's computer each time the computer connects to the switch
+port;</li>
+ <li>configure each ResNet router to bind the IP address of the resident's
+computer to its Ethernet address;</li>
+ <li>collect by-IP-address traffic counts from the ResNet routers several
+times an hour and maintain daily and term-to-date totals of use,</li>
+ <li>exclude use of an on-campus server from the traffic counts if it is
+required for and can be used only for specific high-volume academic
+applications (for example, downloading multimedia learning-resource
+materials, or interacting with the <a href="www.quest.uwaterloo.ca/index.html" webstripperlinkwas="http://ist.uwaterloo.ca/cn/Residence/www.quest.uwaterloo.ca/">Quest</a> student information system); this
+requires that the facility administrator has configured the server so that
+it cannot be subverted for use as an off-campus tunnel;</li>
+ <li>instruct a ResNet router to move a resident into a special
+"constrained bandwidth" queue when the resident has exceeded a limit.</li>
+ </ul>
+ </p>
+
+ <p>There are various motivations to find additional or alternate
+mechanisms that will:
+ <ul>
+ <li>continue to address UW's shared-resource management obligations;</li>
+ <li>simplify the set of ResNet configuration and control software that
+IST maintains;</li>
+ <li>provide ResNet users with more flexible conditions so that they can,
+within reason, transfer larger-volume objects outside of UW's peak-hours
+periods without degrading service to other UW users in the ResNet and
+non-ResNet constituencies;</li>
+ <li>enable ResNet users with portable computers to move between switch
+ports in the residence (for example, when working from a friend's room or
+a common area);</li>
+ <li>enable alternate methods of connecting residence computers (for
+example, wireless transmission between computers and network-connected
+base stations), provided that the alternate methods still provide the
+ability to identify and hold the user of an IP address accountable
+and constrain excess use.</li>
+ </ul>
+ </p>
+
+
+<h2>Alternate means of connecting ResNet computers</h2>
+ <p>The current method serves two purposes. It meets the basic <a href="../Admin/netpract.html#trust" webstripperlinkwas="/cn/Admin/netpract.html#trust">authenticated user</a> trust
+requirement for connection of a device to the campus network by
+identifying the ResNet user by the preassigned IP address in a manner that
+makes it impossible for the connection to use any other IP address, and it
+meets the ResNet resource-management requirment by counting traffic by IP
+address to control excessive use by imposing per-user limits.</p>
+
+ <p>In order to be able to consider alternate approaches that do not bind
+the ResNet user to a permanent IP address associated with a permanent
+connection to a particular port on a particular switch, each alternate
+approach must still meet the authenticated-user trust and
+resource-management limiting requirements. Each such approach must
+therefore provide us with a mechanism that
+ <ul>
+ <li>identifies and authenticates the person whose computer is attempting
+to use a network connection,</li>
+ <li>assigns an IP address to that computer for use during the
+connection,</li>
+ <li>rejects any traffic from that connection that is using a different IP
+address,</li>
+ <li>reclaims the IP address at the end of the connection,</li>
+ <li>keeps an audit log with per-connnection records that contain at least
+the following
+ <pre>userid, IPaddress, startDateTime, endDateTime, bytesSent, bytesRcvd</pre>
+ </li>
+ <li>and has a external-interface means of dynamically constraining the
+access of those who have exceeded their limits.</li>
+ </ul>
+ </p>
+
+ <p>This must work in a manner that is independent of the types of
+computers connected to the network. And if we can achieve an acceptable
+means of meeting the ResNet resource-management requirement in a manner
+that does not require per-user limits, then the last item is not required
+and the audit log reduces to records containing just
+ <pre>userid, IPaddress, startDateTime, endDateTime</pre>
+ </p>
+
+ <p>We know of no products that achieve this, but we will continue looking
+as part of our general technology-tracking activities.</p>
+
+<p class="byline"><a href="http://ist.uwaterloo.ca/~rwwatt/">Roger Watt</a>, IST. This document
+will be updated from time to time as investigations progress.</p>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+ <p align=right>June 4, 1997
+ <p>University of Waterloo is seeking to form a long-term strategic
+relationship with a major vendor of switching, routing, and network-server
+products for the establishment and evolution of its "next-generation
+Internet" campus network to interoperate with the ONet "UNI*net" and
+CANARIE "CA*net-II" regional and national networks. 
+ <p>The technologies to enable this next-generation campus network will
+centre around the integration of Fast Ethernet and Gigabit Ethernet
+switching with IP routing and IP multicast and IP bandwidth reservation
+and QoS, and will extend to include servers for related network services
+such as address-assignment control, network-access device and user
+authentication, Internet and Intranet firewalls, secure Web-based
+commerce, computer-telephony integration, and desktop/classroom
+videoconferencing and distance education. 
+ <p>Phase one of this project, to be in place for September 1997, requires
+the deployment of high-capacity backbone and workgroup switching/routing
+devices supporting Ethernet, Fast Ethernet, interswitch VLANs, and IP
+multicast. The initial core of the network will be a Fast Ethernet
+backbone of from eight to twelve fibre-connected
+switching/routing/multicast modular devices, each of which provides from
+12 to 48 Fast Ethernet fibre and/or copper links to fully-compatible
+workgroup switching devices. A range of workgroup devices is required:
+some workgroups will require from 24 to 48 10Mbps ports each capable of
+supporting multiple devices and two or more 100Mbps ports for the fibre
+uplink and for local UTP-connected workgroup-server devices; others will
+require from 12 to 24 auto-sensing 10/100Mbps ports and a 100Mbps fibre-
+uplink port. One of the core devices must also support multiple ATM links
+(initially, two or more OC-3 ports and one or two T1 circuit-emulation
+cards). The number of workgroup switches is expected to range from about
+thirty to perhaps sixty over the duration of phase one. Phase two of the
+project will extend the capacity of the network and will continue to
+extend the number of workgroup switches.
+ <p>The vendor will enter into some form of on-going "return for credit" 
+agreement to upgrade/replace the phase-one devices to support
+IEEE-standardized Gigabit Ethernet and interswitch VLANs once those
+standards are finalized, to extend the use of ATM to whatever extent UW
+perceives necessary, and to incorporate new function and devices or
+modules as the vendor evolves its products so that the UW campus network
+can continue to evolve in pace with the next-generation Internet
+community.
+ <p>Overview and background documents that were created to facilitate
+UW-internal discussion are available in the "Next-generation network"
+section of the UW Campus Networks webspace
+(http://www.ist.uwaterloo.ca/cn/). Address questions to Roger Watt
+&lt;rwwatt@uwaterloo.ca&gt;.
+
+<hr>
+<p align=right>July 15, 1997 (clarifications)
+
+<p>TOPOLOGY CONSIDERATIONS
+ <p>The new backbone of the UW campus network will be a core of nine
+nodes. We want sufficient multiple paths such that an outage of any one of
+the nine will not prevent communication among the other eight.
+
+<p>ROUTING CONSIDERATIONS
+ <p>The UW campus network is primarily an IP network, but it also carries
+some amount of AppleTalk and must continue to do so for the immediate
+future.
+ <p>The MC core node must be a full-function switching/routing node with
+multiple Ethernet and multiple ATM links, including UW's external
+connection (an 155Mbps ATM link to ONet Networking's K-W switching/routing
+node, located in the same equipment room as UW's MC node). We currently
+use an IP "default route" for the external link, but we may soon need to
+move to some external routing protocol such as BGP4. The MC-node device
+must include the ability to configure special ATM-layer external circuits,
+and the ability to impose accept/deny "filtering" conditions on all IP
+traffic to/from the external connection by a variety of controls including
+IP addresses and IP/TCP/UDP protocol types. We currently capture and
+report on counts of IP packets and bytes to/from the external connection,
+and wish to continue to do so. 
+ <p>The ideal is that layer-three traffic between any two links on one of
+the nine core nodes does not have to leave that node. It may not be
+essential that all other eight nodes have full routing functionality, but
+to avoid single-point-of-failure, at least one other node must. The
+pattern of traffic within the UW network dictates that that be the E2
+node. For the other seven nodes, it may be sufficient that they obtain and
+use routing information from the two full-function nodes. It will be a
+significant asset if this same ability to learn and use routing
+information can be extended out to the workgroup switches.
+
+<p>ON THE MATTER OF ATM
+ <p>In its production environment, UW intends to pursue voice and video
+as IP-based applications, when and as the ability to do so matures within
+the Internet community. While there is an interest in ATM-layer
+connectivity in several research groups, UW has no immediate production
+need to use ATM as the vehicle to interconnect these nine nodes, and it is
+not clear whether the need to extend ATM to the other eight nodes will
+arise within the remainder of this decade. However, special needs may
+arise from time to time, and UW is not unwilling to consider an ATM core
+today if the price is sufficiently compelling to outweigh the added
+staff-impact costs of complexity. 
+
+<p>IMPLEMENTATION TIMING AND MIGRATION
+ <p>We need to have some of this in place by September 1997, but it will
+be impossible to do the full implementation by then. We are unable to
+commit to any given schedule other than one we will make up as we go,
+driven only by our initial implementation successes and our need to deploy
+new equipment and schedule cutovers so as to avoid substantive disruption
+to the current production network.
+
+<p>QUESTIONS, CONCERNS, etc
+ <p>Please clarify the manner in which IP routing works between the
+devices you are proposing. EXAMPLES. What IP route-advertisement protocols
+does the device accept/advertise? How does a node that does not have full
+routing functionality acquire information about routes and the loss of
+routes? 
+ <p>Please clarify the manner in which IP multicast works between the
+devices you are proposing. EXAMPLES. How do the core nodes communicate
+group-membership information out to the workgroup nodes?
+ <p>Please comment on your ability to adapt to our schedule and your
+ability to loan us equipment to assist in the transition from the old
+network to the new network. EXAMPLES. Can you adjust to our need for
+on-going assistance in planning a migration strategy? Can you loan us an
+FDDI interface for the MC core node so that we can interconnect the
+current backbone to the new backbone?
